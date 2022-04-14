@@ -22,8 +22,8 @@ export default function Register() {
     }
 
     const loginClicked = (e) => {
-        const navigate = useNavigate();
-        navigate('/');
+        // const navigate = useNavigate();
+        // navigate('/');
     }
 
     const isEmpty = (user, passwordValidation) => {
@@ -64,8 +64,8 @@ export default function Register() {
         };
         if (isOk(user, passwordValidation)) {
             users.push(user);
-            const navigate = useNavigate();
-            navigate('/');
+            // const navigate = useNavigate();
+            // navigate('/');
             return false;
         }
         return;
@@ -75,40 +75,40 @@ export default function Register() {
         <div className='register-className'>
             <nav className="navbar navbar-light bg-light">
                 <div className="container-fluid">
-                    <b className="navbar-brand" href="#" style="color: rgb(255, 255, 255); font-style: italic; font-size: xx-large;">
+                    <div className="navbar-brand" href="#" >
                         fun talking
-                    </b>
+                    </div>
                 </div>
             </nav>
             <form>
 
                 <div className="mb-3">
-                    <label for="exampleInputEmail1" style="font-size: larger;" className="form-label">Email address</label>
+                    <label   className="form-label">Email address</label>
                     <input type="email" className="form-control" id="email" aria-describedby="emailHelp"></input>
-                    <div id="emailHelp" style="color: black;" className="form-text">We'll never share your email with anyone else.</div>
+                    <div id="emailHelp"  className="form-text">We'll never share your email with anyone else.</div>
                 </div>
 
                 <div className="mb-3">
-                    <label for="exampleInputPassword1" style="font-size: larger;" className="form-label">Password</label>
+                    <label   className="form-label">Password</label>
                     <input type="password" className="form-control" id="password"></input>
                 </div>
                 <div className="mb-3">
-                    <label for="exampleInputPassword1" style="font-size: larger;" className="form-label">Password validation</label>
+                    <label className="form-label">Password validation</label>
                     <input type="password" className="form-control" id="validation"></input>
                 </div>
                 <div className="mb-3">
-                    <label for="exampleInputPassword1" style="font-size: larger;" className="form-label">Nickname</label>
+                    <label className="form-label">Nickname</label>
                     <input type="Name" className="form-control" id="nickname"></input>
                 </div>
                 <div className="mb-3">
-                    <label for="exampleInputPassword1" style="font-size: larger;" className="form-label">Add image</label>
+                    <label  className="form-label">Add image</label>
                     <input type="file" accept="image/*" id="image"></input>
                     <div className="col">
                         <button type="submit" id="register" className="btn btn-primary mb-3" onClick={registerUser}>Register</button>
                     </div>
 
-                    <label for="exampleInputPassword1" className="form-label">already registered?</label>
-                    <button onClick={loginClicked} className="login-button"><a className="link-primary">click here</a></button>
+                    <label  className="form-label">already registered?</label>
+                    <button className="login-button"><a href="\" className="link-primary">click here</a></button>
                 </div>
             </form>
         </div>

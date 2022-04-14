@@ -1,61 +1,33 @@
 import React, { useEffect } from 'react'
 import './Talk.css';
 import { useNavigate } from 'react-router-dom';
+import Massage from '.././massage/Massage'
 
 export default function talk() {
-    var users = [];//contain the chats of all the users
-    var massages = []; //structs of name and the massage he sended and the data and the image.
+    const massages = [{author: 'message-data',clock:'10:12 AM, Today',massageStr:'Are we meeting today?'},
+    {author: 'message-data text-right',clock:'10:12 AM, Today',massageStr:'Are we meeting today?'},
+    {author: 'message-data',clock:'10:12 AM, Today',massageStr:'Are we meeting today12341324?'}
+]; 
+const MassageList = massages.map((massage,key) => {
+    return <Massage author={massage.author} clock ={massage.clock} massageStr={massage.massageStr} key={key} />
+});
 
-    var massage = {
-        name: "roni",
-        massageStr: "hi asdfads adsfadf asdfasdf",
-        date: "13/04/2022",
-        clock: "21:00",
-    }
-    massages.push(massage);
-    var massage = {
-        name: "me",
-        massageStr: "hi",
-        date: "13/04/2022",
-        clock: "21:00",
-    }
-    massages.push(massage);
-    var massage = {
-        name: "roni",
-        massageStr: "hi",
-        date: "13/04/2022",
-        clock: "21:00",
-    }
-    massages.push(massage);
 
-    var user = {
-        name: "roni",
-        Image: "../../public/funTalking.jpg",
-        userChat: massages
-    }
-    users.push(user);
-    user = {
-        name: "roni",
-        Image: "../../public/funTalking.jpg",
-        userChat: massages
-    }
-    users.push(user);
-
-    useEffect(() => {
-        document.getElementById('output').innerHTML = user.userChat[0].massageStr;
-        document.getElementById('last massage').innerHTML = user.userChat[0].massageStr;
-        document.getElementById('image').src = user.Image;
-        document.getElementById('name').innerHTML = user.name;
-    });
+    // useEffect(() => {
+    //     document.getElementById('output').innerHTML = user.userChat[0].massageStr;
+    //     document.getElementById('last massage').innerHTML = user.userChat[0].massageStr;
+    //     document.getElementById('image').src = user.Image;
+    //     document.getElementById('name').innerHTML = user.name;
+    // });
 
 
     return (
         <div className='talk-div'>
             <nav className="navbar navbar-light bg-light">
                 <div className="container-fluid">
-                    <b className="navbar-brand" href="#" style="color: rgb(255, 255, 255); font-style: italic; font-size: xx-large;"  >
+                    <div className="navbar-brand" href="#"  >
                         fun talking
-                    </b>
+                    </div>
                 </div>
             </nav>
             <div className="container">
@@ -128,39 +100,19 @@ export default function talk() {
                                                 <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar"></img>
                                             </a>
                                             <div className="chat-about">
-                                                <h6 style="font-size: large; font-style: italic;" className="m-b-0">Aiden Chavez</h6>
+                                                <h6  className="m-b-0">Aiden Chavez</h6>
                                                 <small>Last seen: 2 hours ago</small>
                                             </div>
                                         </div>
                                         <div className="col-lg-6 hidden-sm text-right">
-                                            <a href="javascript:void(0);" className="btn btn-outline-secondary"><i className="fa fa-camera"></i></a>
-                                            <a href="javascript:void(0);" className="btn btn-outline-primary"><i className="fa fa-image"></i></a>
-                                            <a href="javascript:void(0);" className="btn btn-outline-info"><i className="fa fa-cogs"></i></a>
-                                            <a href="javascript:void(0);" className="btn btn-outline-warning"><i className="fa fa-question"></i></a>
+
                                         </div>
                                     </div>
                                 </div>
                                 <div className="chat-history">
                                     <ul className="m-b-0">
-                                        <li className="clearfix">
-                                            <div className="message-data text-right">
-                                                <span className="message-data-time">10:10 AM, Today</span>
-                                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar"></img>
-                                            </div>
-                                            <div className="message other-message float-right" id="output" > </div>
-                                        </li>
-                                        <li className="clearfix">
-                                            <div className="message-data">
-                                                <span className="message-data-time">10:12 AM, Today</span>
-                                            </div>
-                                            <div className="message my-message">Are we meeting today?</div>
-                                        </li>
-                                        <li className="clearfix">
-                                            <div className="message-data">
-                                                <span className="message-data-time">10:15 AM, Today</span>
-                                            </div>
-                                            <div className="message my-message">Project has been already finished and I have results to show you.</div>
-                                        </li>
+                                        
+                                        {MassageList}
                                     </ul>
                                 </div>
                                 <div className="chat-message clearfix">

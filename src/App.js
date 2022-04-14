@@ -8,17 +8,23 @@ import {
 import Login from './Login/Login';
 import Register from './Register/Register';
 import Talk from './Talk/Talk';
-
+import Massage from './massage/Massage'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/talk" element={<Talk />} />
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          
+          <Route path="/Register" element={<Register />} />
+          
+          <Route path="/talk" element={<Talk />} />
+          
+        </Routes>
+      </BrowserRouter>
+    </div>
+    
   );
 }
 

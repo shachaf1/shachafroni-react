@@ -12,11 +12,14 @@ form{
     border-radius: 3%;
 
   }
-  b{
-
+.navbar-brand{
+  font-weight: bold;
     background-color: rgb(80, 3, 61);
     width: 100%;
     height: 400px;
+    color: rgb(255, 255, 255);
+    font-style: italic;
+    font-size: xx-large;
   }
 
   .login-class {
@@ -25,4 +28,11 @@ form{
 
   .register-button {
       border: 0ch;
+  }
+  .form-label{
+    font-size: larger;
+  }
+
+  .btn{
+    
   }
