@@ -6,13 +6,13 @@ export default function Login() {
     var user1 = {
         email: "roni@gmail.com",
         password: "12341234",
-        image: "fun talking.jpg",
+        image: "../../public/fun talking.jpg",
         nickname: "roni1"
     };
     var user2 = {
         email: "shachaf@gmail.com",
         password: "12341234",
-        image: "fun talking.jpg",
+        image: "../../public/fun talking.jpg",
         nickname: "shachaf1"
     };
     var users = [user1, user2];
@@ -20,7 +20,7 @@ export default function Login() {
     const loginClicked = (e) => {
         var password = document.getElementById("password").value;
         var nickname = document.getElementById("nickname").value;
-        usernum = -1;
+        var usernum = -1;
         for (let i = 0; i < users.length; i++) {
             if (nickname == users[i].nickname && password == users[i].password) {
                 usernum = i;

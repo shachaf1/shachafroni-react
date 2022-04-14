@@ -5,6 +5,10 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import Login from './Login/Login';
+import Register from './Register/Register';
+import Talk from './Talk/Talk';
+
 
 function App() {
   return (
