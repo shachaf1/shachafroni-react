@@ -1,11 +1,13 @@
-function Massage({author,clock,massageStr}) {
+import './Massage.css'
+function Massage({author,authort,clock,massageStr}) {
     return (
-        <li className="clearfix">
-            <div className={author}>
-                <span className="message-data-time">{clock}</span>
-            </div>
-            <div className="message my-message">{massageStr}</div>
-        </li>
+        <div>
+        <img src="../../public/funTalking.jpg'" alt="avatar"></img>
+        <ul className={author}> {massageStr} 
+          <div className= 'small'> {clock}</div>
+          
+          </ul>
+        </div>
     )
 }
 

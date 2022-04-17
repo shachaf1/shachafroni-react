@@ -278,4 +278,8 @@ body{
         overflow-x: auto
     }
 }
-  
+clocks{
+    font-size: xx-small;
+    color: rgb(251, 251, 251);
+
+  }

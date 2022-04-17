@@ -2,11 +2,13 @@ import React, { useEffect } from 'react'
 import './Talk.css';
 import { useNavigate } from 'react-router-dom';
 import Massage from '.././massage/Massage'
-
+import '.././massage/Massage.css'
 export default function talk() {
-    const massages = [{author: 'message-data',clock:'10:12 AM, Today',massageStr:'Are we meeting today?'},
-    {author: 'message-data text-right',clock:'10:12 AM, Today',massageStr:'Are we meeting today?'},
-    {author: 'message-data',clock:'10:12 AM, Today',massageStr:'Are we meeting today12341324?'}
+    const massages = [{author: 'message my-message',authort: 'message-data',clock:'10:12 AM, Today',massageStr:'Are we meeting today?'},
+    {author: 'message other-message float-right',authort: 'message other-message float-right',clock:'10:12 AM, Today',massageStr:'Are we meeting today?'},
+    {author: 'message my-message',authort: 'message-data',clock:'10:12 AM, Today',massageStr:'Are we meeting today?'},
+    {author: 'message my-message',authort:'message-data',clock:'10:12 AM, Today',massageStr:'Are we meeting today?'},
+    {author: 'message my-message',authort:'message-data',clock:'10:12 AM, Today',massageStr:'Are we meeting today?'}
 ]; 
 const MassageList = massages.map((massage,key) => {
     return <Massage author={massage.author} clock ={massage.clock} massageStr={massage.massageStr} key={key} />
@@ -113,6 +115,13 @@ const MassageList = massages.map((massage,key) => {
                                     <ul className="m-b-0">
                                         
                                         {MassageList}
+                                        <div className="clearfix">
+                                            <div className="message-data float-right">
+                                                <span className="message-data-time">10:10 AM, Today</span>  
+                                            </div>
+                                            
+                                        </div>
+                                        <ul class="message other-message float-right"> Hi Aiden, how are you? How is the project coming along? </ul>
                                     </ul>
                                 </div>
                                 <div className="chat-message clearfix">

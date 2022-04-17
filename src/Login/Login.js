@@ -7,7 +7,7 @@ export default function Login() {
     var user1 = {
         email: "roni@gmail.com",
         password: "12341234",
-        image: "../../public/funTalking.jpg",
+        image: "../../funTalking.jpg",
         nickname: "roni1"
     };
     var user2 = {
@@ -62,7 +62,7 @@ export default function Login() {
                     <label  className="form-label">Password</label>
                     <input type="password" className="form-control" id="password"></input>
                     <div className="col">
-                        <button type="submit"  id="login" className="btn btn-primary "><a className=" btn-primary" href= "\talk" >login</a> </button>
+                        <button type="submit"  id="login" className="btn btn-primary "><a className=" btn-primary" href= "/talk" >login</a> </button>
                     </div>
                     <label  className="form-label">not registered?</label>
                     <button   className="register-button"><a href= "\Register" className="link-primary">click here</a></button>
