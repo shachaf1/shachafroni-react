@@ -3,16 +3,29 @@ import './Talk.css';
 import { useNavigate } from 'react-router-dom';
 import Massage from '.././massage/Massage'
 import '.././massage/Massage.css'
+import Contact from '.././contact/Contact'
+import '.././contact/Contact.css'
 export default function talk() {
-    const massages = [{author: 'message my-message',authort: 'message-data',clock:'10:12 AM, Today',massageStr:'Are we meeting today?'},
-    {author: 'message other-message float-right',authort: 'message other-message float-right',clock:'10:12 AM, Today',massageStr:'Are we meeting today?'},
-    {author: 'message my-message',authort: 'message-data',clock:'10:12 AM, Today',massageStr:'Are we meeting today?'},
-    {author: 'message my-message',authort:'message-data',clock:'10:12 AM, Today',massageStr:'Are we meeting today?'},
-    {author: 'message my-message',authort:'message-data',clock:'10:12 AM, Today',massageStr:'Are we meeting today?'}
-]; 
-const MassageList = massages.map((massage,key) => {
-    return <Massage author={massage.author} clock ={massage.clock} massageStr={massage.massageStr} key={key} />
-});
+    const massages = [{author: "message-data float-right",authort: "message other-message float-right",clock:'10:10 AM, Today',massageStr:'Hi Aiden, how are you? How is the project coming along?'},
+                    {author: "message-data",authort: "message my-message",clock:'10:12 AM, Today',massageStr:'Are we meeting today?'},
+                    {author: "message-data float-right",authort: "message other-message float-right",clock:'10:10 AM, Today',massageStr:'Hi Aiden, how are you? How is the project coming along?'},
+                    {author: "message-data",authort: "message my-message",clock:'10:12 AM, Today',massageStr:'Are we meeting today?'},
+                   
+    ]; 
+    const MassageList = massages.map((massage,key) => {
+    return <Massage author={massage.author} authort={massage.authort} clock ={massage.clock} massageStr={massage.massageStr} key={key} />
+    });
+
+    
+    const contacts = [{img: 'https://bootdey.com/img/Content/avatar/avatar2.png',name: 'Vincent Porter',lastMassage:'online'},
+                      {img: 'https://bootdey.com/img/Content/avatar/avatar2.png',name: 'Vincent Porter',lastMassage:'online'},
+                      {img: 'https://bootdey.com/img/Content/avatar/avatar2.png',name: 'Vincent Porter',lastMassage:'online'},
+                      {img: 'https://bootdey.com/img/Content/avatar/avatar2.png',name: 'Vincent Porter',lastMassage:'online'},
+                      {img: 'https://bootdey.com/img/Content/avatar/avatar2.png',name: 'Vincent Porter',lastMassage:'online'}
+    ]; 
+    const ContactList = contacts.map((contact,key) => {
+    return <Contact img={contact.img} name ={contact.name} lastMassage={contact.lastMassage} key={key} />
+    });
 
 
     // useEffect(() => {
@@ -51,6 +64,7 @@ const MassageList = massages.map((massage,key) => {
                                                 <div className="status"> <i className="fa fa-circle offline"></i> left 7 mins ago </div>
                                             </div>
                                     </li>
+                                    {ContactList}
                                     <li className="clearfix active">
                                         <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar"></img>
                                             <div className="about">
@@ -115,12 +129,7 @@ const MassageList = massages.map((massage,key) => {
                                     <ul className="m-b-0">
                                         
                                         {MassageList}
-                                        <div className="clearfix">
-                                            <div className="message-data float-right">
-                                                <span className="message-data-time">10:10 AM, Today</span>  
-                                            </div>
-                                            
-                                        </div>
+                                        
                                         <ul class="message other-message float-right"> Hi Aiden, how are you? How is the project coming along? </ul>
                                     </ul>
                                 </div>
