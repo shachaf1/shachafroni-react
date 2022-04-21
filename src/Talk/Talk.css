@@ -13,7 +13,8 @@ body{
     width: 100%;
     height: 1000%;
     font-style: italic;
-    font-size: xx-large;
+    font-size: 500%;
+    padding-left: 40%;
     color: rgb(255, 255, 255);
     }
 
@@ -22,7 +23,7 @@ body{
     }
 
 .card {
-    left: 25%;
+    left: 20%;
     top: 15%;
     background: rgb(200, 184, 201);
     transition: .5s;
@@ -30,7 +31,8 @@ body{
     margin-bottom: 20%;
     border-radius: .55rem;
     position: absolute;
-    width: 50%;
+    width: 60%;
+    height: 70%;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
 }
 .chat-app .people-list {
@@ -112,24 +114,24 @@ body{
 }
 
 .chat .chat-history {
-    padding-left: 3%;
+    padding-left: 2%;
     padding-bottom: 15%;
-    padding-right: 3%;
-    padding-top: 3%;
+    padding-right: 2%;
+    padding-top: 2%;
     border-bottom: 2px solid #fff
 }
 
 .chat .chat-history ul {
-    padding: 3%;
+    padding: 0%;
 }
 
 .chat .chat-history ul li {
     list-style: none;
-    margin-bottom: 30px;
+    margin-bottom: 30%;
 }
 
 .chat .chat-history ul li:last-child {
-    margin-bottom: 0px
+    margin-bottom: 0%;
 }
 
 .chat .chat-history .message-data {
