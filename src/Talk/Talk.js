@@ -5,14 +5,16 @@ import Massage from '.././massage/Massage'
 import '.././massage/Massage.css'
 import Contact from '.././contact/Contact'
 import '.././contact/Contact.css'
+
 export default function talk() {
-    const massages = [{author: "message-data float-right",authort: "message other-message float-right",clock:'10:10 AM, Today',massageStr:'Hi Aiden, how are you? How is the project coming along?'},
+
+    var massages = [{author: "message-data float-right",authort: "message other-message float-right",clock:'10:10 AM, Today',massageStr:'Hi Aiden, how are you? How is the project coming along?'},
                     {author: "message-data",authort: "message my-message",clock:'10:12 AM, Today',massageStr:'Are we meeting today?'},
                     {author: "message-data float-right",authort: "message other-message float-right",clock:'10:10 AM, Today',massageStr:'Hi Aiden, how are you? How is the project coming along?'},
                     {author: "message-data",authort: "message my-message",clock:'10:12 AM, Today',massageStr:'Are we meeting today?'},
                    
     ]; 
-    const MassageList = massages.map((massage,key) => {
+    var MassageList = massages.map((massage,key) => {
     return <Massage author={massage.author} authort={massage.authort} clock ={massage.clock} massageStr={massage.massageStr} key={key} />
     });
 
@@ -26,6 +28,14 @@ export default function talk() {
     const ContactList = contacts.map((contact,key) => {
     return <Contact img={contact.img} name ={contact.name} lastMassage={contact.lastMassage} key={key} />
     });
+
+    const send = (e) => {
+        var str = document.getElementById("send").value;
+        var newMassage= {author: "message-data float-right",authort: "message other-message float-right",clock:'10:10 AM, Today',massageStr:str}; 
+        
+        document.getElementById("send").value="";
+        return;
+    };
 
 
     // useEffect(() => {
@@ -49,12 +59,13 @@ export default function talk() {
                 <div className="row clearfix">
                     <div className="col-lg-12">
                         <div className="card chat-app">
-                            <div id="plist" className="people-list">
+
+                            <div id="plist" className="people-list" data-spy="scroll" data-target=".navbar" data-offset="50">
                                 <div className="input-group">
                                     <div className="input-group-prepend">
-                                        <span className="input-group-text"><i className="fa fa-search"></i></span>
+                                        
                                     </div>
-                                    <input type="text" className="form-control" placeholder="Search..."></input>
+                                    <input type="text" className="form-control"  id="searchContact" placeholder="Search..."></input>
                                 </div>
                                 <ul className="list-unstyled chat-list mt-2 mb-0">
                                     <li className="clearfix">
@@ -64,7 +75,7 @@ export default function talk() {
                                                 <div className="status"> <i className="fa fa-circle offline"></i> left 7 mins ago </div>
                                             </div>
                                     </li>
-                                    {ContactList}
+                                    
                                     <li className="clearfix active">
                                         <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar"></img>
                                             <div className="about">
@@ -136,9 +147,9 @@ export default function talk() {
                                 <div className="chat-message clearfix">
                                     <div className="input-group mb-0">
                                         <div className="input-group-prepend">
-                                            <span className="input-group-text"><i className="fa fa-send"></i></span>
+                                            <span className="input-group-text"><i className="fa fa-send" type="submit" onClick={send}>send</i></span>
                                         </div>
-                                        <input type="text" className="form-control" placeholder="Enter text here..."></input>
+                                        <input type="text" id ="send" className="form-control" placeholder="Enter text here..."></input>
                                     </div>
                                 </div>
                             </div>

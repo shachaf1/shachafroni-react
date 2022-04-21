@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import searchContact from './searchContact/searchContact';
+import {useState} from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -9,8 +11,10 @@ import Login from './Login/Login';
 import Register from './Register/Register';
 import Talk from './Talk/Talk';
 import Massage from './massage/Massage'
+import Contact from './contact/Contact';
 
 function App() {
+  
   return (
     <div>
       <BrowserRouter>

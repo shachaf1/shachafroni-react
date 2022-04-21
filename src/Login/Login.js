@@ -32,8 +32,8 @@ export default function Login() {
             alert("incorect nickname or password");
             return;
         }
-        //const navigate = useNavigate();
-        //navigate('/talk');
+       // const navigate = useNavigate();
+      //  navigate('/talk');
         return false;
     }
 
@@ -62,7 +62,7 @@ export default function Login() {
                     <label  className="form-label">Password</label>
                     <input type="password" className="form-control" id="password"></input>
                     <div className="col">
-                        <button type="submit"  id="login" className="btn btn-primary "><a className=" btn-primary" href= "/talk" >login</a> </button>
+                        <button type="submit"  id="login" className="btn btn-primary"><a className=" btn-primary" href="\Talk">login</a> </button>
                     </div>
                     <label  className="form-label">not registered?</label>
                     <button   className="register-button"><a href= "\Register" className="link-primary">click here</a></button>
@@ -70,5 +70,4 @@ export default function Login() {
             </form>
         </div>
     )
-    
 }
