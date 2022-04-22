@@ -1,34 +1,27 @@
-import React, { useEffect } from 'react'
+import React, { useEffect} from 'react'
 import './Talk.css';
 import { useNavigate } from 'react-router-dom';
 import Massage from '.././massage/Massage'
 import '.././massage/Massage.css'
-import Contact from '.././contact/Contact'
-import '.././contact/Contact.css'
+import massages from '../massage/massages'; 
+import contacts from '../contact/contacts';
+import Search from '../search/Search';
+import { useState } from 'react';
 
-export default function talk() {
+import ContactListResult from '../contactListResult/ContactListResult';
+export default function Talk() {
+    
 
-    var massages = [{author: "message-data float-right",authort: "message other-message float-right",clock:'10:10 AM, Today',massageStr:'Hi Aiden, how are you? How is the project coming along?'},
-                    {author: "message-data",authort: "message my-message",clock:'10:12 AM, Today',massageStr:'Are we meeting today?'},
-                    {author: "message-data float-right",authort: "message other-message float-right",clock:'10:10 AM, Today',massageStr:'Hi Aiden, how are you? How is the project coming along?'},
-                    {author: "message-data",authort: "message my-message",clock:'10:12 AM, Today',massageStr:'Are we meeting today?'},
-                   
-    ]; 
+
     var MassageList = massages.map((massage,key) => {
     return <Massage author={massage.author} authort={massage.authort} clock ={massage.clock} massageStr={massage.massageStr} key={key} />
     });
 
-    
-    const contacts = [{img: 'https://bootdey.com/img/Content/avatar/avatar2.png',name: 'Vincent Porter',lastMassage:'online'},
-                      {img: 'https://bootdey.com/img/Content/avatar/avatar2.png',name: 'Vincent Porter',lastMassage:'online'},
-                      {img: 'https://bootdey.com/img/Content/avatar/avatar2.png',name: 'Vincent Porter',lastMassage:'online'},
-                      {img: 'https://bootdey.com/img/Content/avatar/avatar2.png',name: 'Vincent Porter',lastMassage:'online'},
-                      {img: 'https://bootdey.com/img/Content/avatar/avatar2.png',name: 'Vincent Porter',lastMassage:'online'}
-    ]; 
-    const ContactList = contacts.map((contact,key) => {
-    return <Contact img={contact.img} name ={contact.name} lastMassage={contact.lastMassage} key={key} />
-    });
 
+    const [contactList, setContactList] = useState(contacts);
+    const doSearch = function(q){
+        setContactList(contacts.filter((contact) => contact.name.includes(q)));
+    }
     const send = (e) => {
         var str = document.getElementById("send").value;
         var newMassage= {author: "message-data float-right",authort: "message other-message float-right",clock:'10:10 AM, Today',massageStr:str}; 
@@ -47,7 +40,7 @@ export default function talk() {
 
 
     return (
-        <div className='talk-div'>
+        <div className='Talk-div'>
             <nav className="navbar navbar-light bg-light">
                 <div className="container-fluid">
                     <div className="navbar-brand" href="#"  >
@@ -61,13 +54,14 @@ export default function talk() {
                         <div className="card chat-app">
 
                             <div id="plist" className="people-list" data-spy="scroll" data-target=".navbar" data-offset="50">
-                                <div className="input-group">
-                                    <div className="input-group-prepend">
-                                        
-                                    </div>
-                                    <input type="text" className="form-control"  id="searchContact" placeholder="Search..."></input>
-                                </div>
+                                <Search doSearch={doSearch}/>
                                 <ul className="list-unstyled chat-list mt-2 mb-0">
+                                    <ContactListResult contacts={contactList} />
+
+
+
+
+                        
                                     <li className="clearfix">
                                         <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar"></img>
                                             <div className="about">
@@ -123,9 +117,7 @@ export default function talk() {
                                 <div className="chat-header clearfix">
                                     <div className="row">
                                         <div className="col-lg-6">
-                                            <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar"></img>
-                                            </a>
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar"></img>
                                             <div className="chat-about">
                                                 <h6  className="m-b-0">Aiden Chavez</h6>
                                                 <small>Last seen: 2 hours ago</small>
@@ -141,7 +133,7 @@ export default function talk() {
                                         
                                         {MassageList}
                                         
-                                        <ul class="message other-message float-right"> Hi Aiden, how are you? How is the project coming along? </ul>
+                                        <ul className="message other-message float-right"> Hi Aiden, how are you? How is the project coming along? </ul>
                                     </ul>
                                 </div>
                                 <div className="chat-message clearfix">

@@ -1,15 +1,20 @@
 import './Contact.css'
-function Contact({img,name,lastMassages}) {
+function Contact({img,name,lastMassage,kind}) {
     return (
         <div>
-            <li className="clearfix active">
-                <img src={img} alt="avatar"></img>
+            <li className={kind}>
+                <img src={img} alt="image"></img>
                 <div className="about">
                     <div className="name">{name}</div>
-                    <div className="lastMassage"> <i className="fa fa-circle online"></i> {lastMassages} </div>
+                    <div className="status"> <i className="fa fa-circle offline"></i> {lastMassage} </div>
                 </div>
             </li>
           </div>
+
+
+
+
+
     )
 }
 

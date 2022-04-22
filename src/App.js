@@ -1,6 +1,5 @@
 import logo from './logo.svg';
 import './App.css';
-import searchContact from './searchContact/searchContact';
 import {useState} from 'react';
 import {
   BrowserRouter,
@@ -23,7 +22,7 @@ function App() {
           
           <Route path="/Register" element={<Register />} />
           
-          <Route path="/talk" element={<Talk />} />
+          <Route path="/Talk" element={<Talk />} />
           
         </Routes>
       </BrowserRouter>

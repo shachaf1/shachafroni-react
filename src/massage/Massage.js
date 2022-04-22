@@ -4,7 +4,7 @@ function Massage({ author, authort, clock, massageStr }) {
         <div>
             <div className="clearfix">
             </div>
-            <ul class={authort}> {massageStr} </ul>
+            <ul className={authort}> {massageStr} </ul>
             <div className={author}>
                 <span className="message-data-time">{clock}</span>
             </div>

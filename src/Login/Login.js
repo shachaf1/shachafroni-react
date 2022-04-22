@@ -33,7 +33,7 @@ export default function Login() {
             return;
         }
        // const navigate = useNavigate();
-      //  navigate('/talk');
+      //  navigate('/Talk');
         return false;
     }
 
