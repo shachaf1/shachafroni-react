@@ -1,14 +1,13 @@
-import React, { useEffect} from 'react'
-import './Talk.css';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Massage from '.././massage/Massage'
-import '.././massage/Massage.css'
-import massages from '../massage/massages'; 
+import Massage from '.././massage/Massage';
+import '.././massage/Massage.css';
 import contacts from '../contact/contacts';
-import Search from '../search/Search';
-import { useState } from 'react';
-
 import ContactListResult from '../contactListResult/ContactListResult';
+import massages from '../massage/massages';
+import Search from '../search/Search';
+import './Talk.css';
+
 export default function Talk() {
     
 
@@ -58,68 +57,16 @@ export default function Talk() {
                                 <ul className="list-unstyled chat-list mt-2 mb-0">
                                     <ContactListResult contacts={contactList} />
 
-
-
-
-                        
-                                    <li className="clearfix">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar"></img>
-                                            <div className="about">
-                                                <div className="name">Vincent Porter</div>
-                                                <div className="status"> <i className="fa fa-circle offline"></i> left 7 mins ago </div>
-                                            </div>
-                                    </li>
                                     
-                                    <li className="clearfix active">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar"></img>
-                                            <div className="about">
-                                                <div className="name">Aiden Chavez</div>
-                                                <div className="status"> <i className="fa fa-circle online"></i> online </div>
-                                            </div>
-                                    </li>
-                                    <li className="clearfix">
-                                        <img id="image" alt="avatar"></img>
-                                            <div className="about">
-                                            <div id="last massage" className="status"> <i className="fa fa-circle online"></i></div>
-                                            </div>
-                                    </li>
-                                    <li className="clearfix">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="avatar"></img>
-                                            <div className="about">
-                                                <div className="name">Mike Thomas</div>
-                                                <div className="status"> <i className="fa fa-circle online"></i> online </div>
-                                            </div>
-                                    </li>
-                                    <li className="clearfix">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar"></img>
-                                            <div className="about">
-                                                <div className="name">Christian Kelly</div>
-                                                <div className="status"> <i className="fa fa-circle offline"></i> left 10 hours ago </div>
-                                            </div>
-                                    </li>
-                                    <li className="clearfix">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="avatar"></img>
-                                            <div className="about">
-                                                <div className="name">Monica Ward</div>
-                                                <div className="status"> <i className="fa fa-circle online"></i> online </div>
-                                            </div>
-                                    </li>
-                                    <li className="clearfix">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="avatar"></img>
-                                            <div className="about">
-                                                <div className="name">Dean Henry</div>
-                                                <div className="status"> <i className="fa fa-circle offline"></i> offline since Oct 28 </div>
-                                            </div>
-                                    </li>
                                 </ul>
                             </div>
                             <div className="chat">
                                 <div className="chat-header clearfix">
                                     <div className="row">
                                         <div className="col-lg-6">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar"></img>
+                                            <img src={contacts[0].img} alt="avatar"></img>
                                             <div className="chat-about">
-                                                <h6  className="m-b-0">Aiden Chavez</h6>
+                                                <h6  className="m-b-0">{contacts[0].name}</h6>
                                                 <small>Last seen: 2 hours ago</small>
                                             </div>
                                         </div>
