@@ -22,7 +22,7 @@ export default function Talk() {
     const doSearch = function(q){
         setContactList(contacts.filter((contact) => contact.name.includes(q)));
     }
-
+    
     const send = function(){
         var str = document.getElementById("send").value;
         var newMassage= {author: "message-data float-right",authort: "message other-message float-right",clock:'10:10 AM, Today',massageStr:str}; 
@@ -88,6 +88,7 @@ export default function Talk() {
                                 </div>
                                 <div className="chat-message clearfix">
                                     <div className="input-group mb-0">
+                                        
                                         <div className="input-group-prepend">
                                             <span className="input-group-text"><i className="fa fa-send" type="submit" onClick={send}>send</i></span>
                                         </div>

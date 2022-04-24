@@ -49,7 +49,7 @@ export default function Register() {
         return true;
     }
 
-    const registerUser = (e) => {
+    const RegisterUser = (e) => {
         var email = document.getElementById("email").value;
         var password = document.getElementById("password").value;
         var nickname = document.getElementById("nickname").value;
@@ -64,8 +64,8 @@ export default function Register() {
         };
         if (isOk(user, passwordValidation)) {
             users.push(user);
-            // const navigate = useNavigate();
-            // navigate('/');
+            //const navigate = useNavigate();
+            //navigate('/');
             return false;
         }
         return;
@@ -104,7 +104,7 @@ export default function Register() {
                     <label  className="form-label">Add image</label>
                     <input type="file" accept="image/*" id="image"></input>
                     <div className="col">
-                        <button type="submit" id="register" className="btn btn-primary mb-3" onClick={registerUser}>Register</button>
+                        <button type="submit" id="register" className="btn btn-primary mb-3" onClick={RegisterUser}>Register</button>
                     </div>
 
                     <label  className="form-label">already registered?</label>
