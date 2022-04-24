@@ -1,9 +1,9 @@
 import './Register.css'
 
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
-export default function Register() {
+function Register() {
     var users = [];
     const validationPassword = (user, passwordValidation) => {
         if(user.password != passwordValidation) {
@@ -49,6 +49,7 @@ export default function Register() {
         return true;
     }
 
+    let navigate = useNavigate();
     const RegisterUser = (e) => {
         var email = document.getElementById("email").value;
         var password = document.getElementById("password").value;
@@ -62,12 +63,12 @@ export default function Register() {
             image: image,
             nickname: nickname
         };
-        if (isOk(user, passwordValidation)) {
-            users.push(user);
-            //const navigate = useNavigate();
-            //navigate('/');
-            return false;
+        if (!isOk(user, passwordValidation)) {
+            return;
         }
+        users.push(user);
+        
+        navigate('/');
         return;
     };
 
@@ -114,3 +115,4 @@ export default function Register() {
         </div>
     )
 }
+export default Register;

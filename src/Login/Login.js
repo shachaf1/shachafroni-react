@@ -18,6 +18,7 @@ export default function Login() {
     };
     var users = [user1, user2];
 
+    let navigate = useNavigate();
     const loginClicked = (e) => {
         var password = document.getElementById("password").value;
         var nickname = document.getElementById("nickname").value;
@@ -32,8 +33,7 @@ export default function Login() {
             alert("incorect nickname or password");
             return;
         }
-       // const navigate = useNavigate();
-      //  navigate('/Talk');
+        navigate('/Talk');
         return false;
     }
 
@@ -62,7 +62,7 @@ export default function Login() {
                     <label  className="form-label">Password</label>
                     <input type="password" className="form-control" id="password"></input>
                     <div className="col">
-                        <button type="submit"  id="login" className="btn btn-primary"><a className=" btn-primary" href="\Talk">login</a> </button>
+                        <button type="submit"  id="login" className="btn btn-primary"><a className=" btn-primary" onClick={loginClicked}>login</a> </button>
                     </div>
                     <label  className="form-label">not registered?</label>
                     <button   className="register-button"><a href= "\Register" className="link-primary">click here</a></button>
