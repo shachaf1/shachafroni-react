@@ -7,6 +7,7 @@ import ContactListResult from '../contactListResult/ContactListResult';
 import massages from '../massage/massages';
 import Search from '../search/Search';
 import './Talk.css';
+import { ReactDOM } from 'react';
 
 export default function Talk() {
     
@@ -16,16 +17,18 @@ export default function Talk() {
     return <Massage author={massage.author} authort={massage.authort} clock ={massage.clock} massageStr={massage.massageStr} key={key} />
     });
 
-
+    
     const [contactList, setContactList] = useState(contacts);
     const doSearch = function(q){
         setContactList(contacts.filter((contact) => contact.name.includes(q)));
     }
-    const send = (e) => {
+
+    const send = function(){
         var str = document.getElementById("send").value;
         var newMassage= {author: "message-data float-right",authort: "message other-message float-right",clock:'10:10 AM, Today',massageStr:str}; 
-        
+        massages.push(newMassage);
         document.getElementById("send").value="";
+        console.log(massages);
         return;
     };
 
@@ -53,7 +56,7 @@ export default function Talk() {
                         <div className="card chat-app">
 
                             <div id="plist" className="people-list" data-spy="scroll" data-target=".navbar" data-offset="50">
-                                <Search doSearch={doSearch}/>
+                                <Search doSearch={doSearch} className ="search"/>
                                 <ul className="list-unstyled chat-list mt-2 mb-0">
                                     <ContactListResult contacts={contactList} />
 

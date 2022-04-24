@@ -35,18 +35,34 @@ body{
     height: 70%;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
 }
-.chat-app .people-list {
+.chat-app .people-list{
     width: 39%;
     position: absolute;
     left: 0;
     top: 0;
     padding: 3%;
     z-index: 7;
+    overflow-y: scroll;
+    height: 100%;
 }
-
+::-webkit-scrollbar{
+    width: 25px;
+}
+::-webkit-scrollbar-track{
+    background: #dee1e3;
+    border-radius: 25px;
+}
+::-webkit-scrollbar-thumb{
+    background-image: linear-gradient(rgb(177, 173, 173),rgb(84, 84, 83));
+    border-radius: 25px;
+}
+.search{
+    position:absolute;
+}
 .chat-app .chat {
     margin-left: 38%;
-    border-left: 1px solid #1e1c1c
+    border-left: 1px solid #1e1c1c;
+    
 }
 
 .people-list {
@@ -64,7 +80,8 @@ body{
 
 .people-list .chat-list li:hover {
     background: #efefef;
-    cursor: pointer
+    cursor: pointer;
+
 }
 
 .people-list .chat-list li.active {
@@ -118,7 +135,10 @@ body{
     padding-bottom: 15%;
     padding-right: 2%;
     padding-top: 2%;
-    border-bottom: 2px solid #fff
+    border-bottom: 2px solid #fff;
+    overflow-y: scroll;
+    height: 50%;
+
 }
 
 .chat .chat-history ul {
@@ -135,7 +155,8 @@ body{
 }
 
 .chat .chat-history .message-data {
-    margin-bottom: 15px
+    margin-bottom: 15px;
+
 }
 
 .chat .chat-history .message-data img {
@@ -145,7 +166,7 @@ body{
 }
 
 .chat .chat-history .message-data-time {
-    color: #434651;
+    color: #514349;
     padding-left: 6px;
     font-size:70%;
 }
@@ -157,7 +178,8 @@ body{
     font-size: 16px;
     border-radius: 7px;
     display: inline-block;
-    position: relative
+    position: relative;
+
 }
 
 .chat .chat-history .message:after {
@@ -171,7 +193,8 @@ body{
     pointer-events: none;
     border-bottom-color: #fff;
     border-width: 10px;
-    margin-left: -10px
+    margin-left: -10px;
+
 }
 
 .chat .chat-history .my-message {
