@@ -2,10 +2,11 @@ import './Register.css'
 
 import React from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
+import users from '../users';
 
 
 function Register() {
-    var users = [];
+    
     const validationPassword = (user, passwordValidation) => {
         if(user.password != passwordValidation) {
             return false;

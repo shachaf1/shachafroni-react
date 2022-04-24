@@ -65,6 +65,7 @@ body{
 .chat-app .chat {
     margin-left: 38%;
     border-left: 1px solid #1e1c1c;
+    overflow-y: auto;
     
 }
 
@@ -188,38 +189,13 @@ body{
 
 }
 
-.chat .chat-history .message:after {
-    bottom: 100%;
-    left: 7%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-bottom-color: #fff;
-    border-width: 10px;
-    margin-left: -10px;
 
-}
 
 .chat .chat-history .my-message {
     background: #e8f1f3;
 }
 
-.chat .chat-history .my-message:after {
-    bottom: 100%;
-    left: 30px;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-bottom-color: #efefef;
-    border-width: 10px;
-    margin-left: -10px
-}
+
 
 .chat .chat-history .other-message {
     background-color: #289cda;
@@ -228,7 +204,10 @@ body{
 
 .chat .chat-history .other-message:after {
     border-bottom-color: #289cda;
-    left: 93%
+    right: min(200px);
+    left: 90%;
+    
+    
 }
 
 .chat .chat-message {

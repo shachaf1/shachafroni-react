@@ -1,22 +1,11 @@
 import React from 'react'
 import './Login.css'
 import { useNavigate } from 'react-router-dom';
+import users from '../users';
 export default function Login() {
  
     
-    var user1 = {
-        email: "roni@gmail.com",
-        password: "12341234",
-        image: "../../funTalking.jpg",
-        nickname: "roni1"
-    };
-    var user2 = {
-        email: "shachaf@gmail.com",
-        password: "12341234",
-        image: "../../public/funTalking.jpg",
-        nickname: "shachaf1"
-    };
-    var users = [user1, user2];
+
 
     let navigate = useNavigate();
     const loginClicked = (e) => {

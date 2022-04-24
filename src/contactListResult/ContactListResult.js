@@ -1,15 +1,21 @@
- import contacts from "../contact/contacts";
+import contacts from "../contact/contacts";
 import Contact from "../contact/Contact";
 
-function ContactListResult({contacts},handleMain){
+function ContactListResult({contacts,selectContact}){
+    const foo = function (q) {
+        selectContact(q)
+    }
+
     var ContactList = contacts.map((contact,key) => {
-        return <Contact {...contact} key={key} handleMain={handleMain}/>
+        return <Contact {...contact} key={key} funct={foo}/>
     });
 
 
     return(
         <div >
+            
             {ContactList}
+            
         </div>
     )
 }

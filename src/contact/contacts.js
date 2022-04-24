@@ -1,8 +1,9 @@
 import massages from "../massage/massages";
-var contacts =  [{img: 'https://bootdey.com/img/Content/avatar/avatar1.png',name: 'almog yosef',kind:'clearfix active',massages: massages},
-                {img: 'https://bootdey.com/img/Content/avatar/avatar8.png',name: 'roni gilboa',kind:'clearfix',massages: massages},
-                {img: 'https://bootdey.com/img/Content/avatar/avatar2.png',name: 'oren cohen',kind:'clearfix',massages: massages},
-                {img: 'https://bootdey.com/img/Content/avatar/avatar1.png',name: 'vincent Porter',kind:'clearfix',massages: massages},
+import example from "./example.jpg"
+var contacts =  [{img: example,name: 'almog yosef',kind:'clearfix',massages: JSON.parse(JSON.stringify(massages))},
+                {img: 'https://bootdey.com/img/Content/avatar/avatar8.png',name: 'roni gilboa',kind:'clearfix',massages: JSON.parse(JSON.stringify(massages))},
+                {img: 'https://bootdey.com/img/Content/avatar/avatar2.png',name: 'oren cohen',kind:'clearfix',massages: JSON.parse(JSON.stringify(massages))},
+                {img: 'https://bootdey.com/img/Content/avatar/avatar1.png',name: 'vincent Porter',kind:'clearfix',massages: JSON.parse(JSON.stringify(massages))},
                 {img: 'https://bootdey.com/img/Content/avatar/avatar2.png',name: 'Aiden Chavez',kind:'clearfix',massages: massages},
                 {img: 'https://bootdey.com/img/Content/avatar/avatar3.png',name: 'Mike Thomas',kind:'clearfix',massages: massages},
                 {img: 'https://bootdey.com/img/Content/avatar/avatar4.png',name: 'dani cohen',kind:'clearfix',massages: massages},

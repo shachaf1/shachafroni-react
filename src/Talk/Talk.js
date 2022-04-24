@@ -13,25 +13,34 @@ export default function Talk() {
     
 
 
-    var MassageList = massages.map((massage,key) => {
-    return <Massage author={massage.author} authort={massage.authort} clock ={massage.clock} massageStr={massage.massageStr} key={key} />
-    });
+
 
     
     const [contactList, setContactList] = useState(contacts);
     const doSearch = function(q){
         setContactList(contacts.filter((contact) => contact.name.includes(q)));
     }
-    const [mainContact, setContact] = useState(contacts[0].name);
-    const setContact2 =(event) =>{
-        setContact(event.target.name);
+
+    const [mainContact, setMainContact] = useState(contacts[1]);
+
+    const selectContact = function(q) {
+        setMainContact(contacts.find(elem => elem.name===q));
     }
+    var MassageList = mainContact.massages.map((massage,key) => {
+        return <Massage author={massage.author} authort={massage.authort} clock ={massage.clock} massageStr={massage.massageStr} key={key} />
+        });
+    
+    const [filler, setFiller] = useState(0);
+    
+
     const send = function(){
         var str = document.getElementById("send").value;
-        var newMassage= {author: "message-data float-right",authort: "message other-message float-right",clock:'10:10 AM, Today',massageStr:str}; 
-        massages.push(newMassage);
+        var today = new Date();
+        const zeroPad = (num, places) => String(num).padStart(places, '0')
+        var newMassage= {author: "message-data float-right",authort: "message other-message float-right",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today',massageStr:str}; 
+        mainContact.massages.push(newMassage);
         document.getElementById("send").value="";
-        console.log(massages);
+        doSearch("");
         return;
     };
 
@@ -45,9 +54,7 @@ export default function Talk() {
 
 
     return (
-        
         <div className='Talk-div'>
-            {console.log(mainContact)}
             <nav className="navbar navbar-light bg-light">
                 <div className="container-fluid">
                     <div className="navbar-brand" href="#"  >
@@ -63,7 +70,7 @@ export default function Talk() {
                             <div id="plist" className="people-list" data-spy="scroll" data-target=".navbar" data-offset="50">
                                 <Search doSearch={doSearch} className ="search"/>
                                 <ul className="list-unstyled chat-list mt-2 mb-0">
-                                    <ContactListResult contacts={contactList} handleMain={setContact2}/>
+                                    <ContactListResult contacts={contactList} selectContact={selectContact}/>
 
                                     
                                 </ul>
@@ -72,9 +79,9 @@ export default function Talk() {
                                 <div className="chat-header clearfix">
                                     <div className="row">
                                         <div className="col-lg-6">
-                                            <img src={contacts[0].img} alt="avatar"></img>
+                                            <img src={mainContact.img} alt="avatar"></img>
                                             <div className="chat-about">
-                                                <h6  className="m-b-0">{contacts[0].name}</h6>
+                                                <h6  className="m-b-0">{mainContact.name}</h6>
                                                 <small>Last seen: 2 hours ago</small>
                                             </div>
                                         </div>
@@ -86,9 +93,9 @@ export default function Talk() {
                                 <div className="chat-history">
                                     <ul className="m-b-0">
                                         
-                                        {contacts.find(e => e.name==mainContact).massages}
+                                        {MassageList}
                                         
-                                        
+                                       
                                     </ul>
                                 </div>
                                 <div className="chat-message clearfix">
