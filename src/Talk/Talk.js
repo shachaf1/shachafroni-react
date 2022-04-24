@@ -22,7 +22,10 @@ export default function Talk() {
     const doSearch = function(q){
         setContactList(contacts.filter((contact) => contact.name.includes(q)));
     }
-    
+    const [mainContact, setContact] = useState(contacts[0].name);
+    const setContact2 =(event) =>{
+        setContact(event.target.name);
+    }
     const send = function(){
         var str = document.getElementById("send").value;
         var newMassage= {author: "message-data float-right",authort: "message other-message float-right",clock:'10:10 AM, Today',massageStr:str}; 
@@ -42,7 +45,9 @@ export default function Talk() {
 
 
     return (
+        
         <div className='Talk-div'>
+            {console.log(mainContact)}
             <nav className="navbar navbar-light bg-light">
                 <div className="container-fluid">
                     <div className="navbar-brand" href="#"  >
@@ -58,7 +63,7 @@ export default function Talk() {
                             <div id="plist" className="people-list" data-spy="scroll" data-target=".navbar" data-offset="50">
                                 <Search doSearch={doSearch} className ="search"/>
                                 <ul className="list-unstyled chat-list mt-2 mb-0">
-                                    <ContactListResult contacts={contactList} />
+                                    <ContactListResult contacts={contactList} handleMain={setContact2}/>
 
                                     
                                 </ul>
@@ -81,9 +86,9 @@ export default function Talk() {
                                 <div className="chat-history">
                                     <ul className="m-b-0">
                                         
-                                        {MassageList}
+                                        {contacts.find(e => e.name==mainContact).massages}
                                         
-                                        <ul className="message other-message float-right"> Hi Aiden, how are you? How is the project coming along? </ul>
+                                        
                                     </ul>
                                 </div>
                                 <div className="chat-message clearfix">

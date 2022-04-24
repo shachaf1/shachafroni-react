@@ -24,7 +24,7 @@ body{
     .m-b-0{
         font-size: large; font-style: italic;
     }
-
+    
 .card {
     left: 20%;
     top: 15%;
@@ -159,9 +159,11 @@ body{
 
 .chat .chat-history .message-data {
     margin-bottom: 15px;
-
 }
-
+.chat .chat-history .my-message-data {
+    margin-bottom: 15px;
+    margin-right: 0px;
+}
 .chat .chat-history .message-data img {
     float: right;
     border-radius: 40px;
@@ -182,6 +184,7 @@ body{
     border-radius: 7px;
     display: inline-block;
     position: relative;
+    margin-top: 5%;
 
 }
 

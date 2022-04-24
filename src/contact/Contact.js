@@ -1,22 +1,17 @@
 import './Contact.css'
-function Contact({send,img,name,kind, massages}) {
-
+function Contact(props) {
+    
     return (
         <div>
-            <li className={kind}>
-                <img src={img} ></img>
+            <li className={props.kind}>
+                <img src={props.img} ></img>
                 
                 <div className="about">
-                    <div className="name">{name}</div>
-                    <div  className="status"> <i className="fa fa-circle offline"></i> {massages[0].massageStr} </div>
+                    <div className="name">{props.name}</div>
+                    <div onClick={props.handleMain} className="status"> <i className="fa fa-circle offline"></i> {props.massages[0].massageStr} </div>
                 </div>
             </li>
           </div>
-
-
-
-
-
     )
 }
 
