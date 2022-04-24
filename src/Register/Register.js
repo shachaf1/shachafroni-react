@@ -3,6 +3,7 @@ import './Register.css'
 import React from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
 
+
 function Register() {
     var users = [];
     const validationPassword = (user, passwordValidation) => {
