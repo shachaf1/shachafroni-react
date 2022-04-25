@@ -1,5 +1,6 @@
 
 import {useRef} from 'react';
+import AddContact from '../AddContact/AddContact';
 
 function Search({doSearch}){
    const searchBox = useRef(null);
@@ -13,6 +14,7 @@ function Search({doSearch}){
                 
             </div>
             <input ref={searchBox} onKeyUp={search} type="text" className="form-control"   placeholder="Search..."></input>
+            <AddContact/>
         </div>
 
     )

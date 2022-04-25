@@ -27,9 +27,12 @@ export default function Talk() {
     const selectContact = function(q) {
         setMainContact(contacts.find(elem => elem.name===q));
     }
-    var MassageList = mainContact.massages.map((massage,key) => {
+    var MassageList= "";
+    if (mainContact.massages!=[]){
+     MassageList = mainContact.massages.map((massage,key) => {
         return <Massage author={massage.author} authort={massage.authort} clock ={massage.clock} massageValue={massage.massageValue} type ={massage.type} key={key} />
         });
+    }
     
     const [filler, setFiller] = useState(0);
     
@@ -38,7 +41,7 @@ export default function Talk() {
         var str = document.getElementById("send").value;
         var today = new Date();
         const zeroPad = (num, places) => String(num).padStart(places, '0')
-        var newMassage= {author: "message-data float-right",authort: "message other-message float-right",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today',massageStr:str}; 
+        var newMassage= {author: "message-data float-right",authort: "message other-message float-right",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today',massageValue:str, type:'text'}; 
         mainContact.massages.push(newMassage);
         document.getElementById("send").value="";
         doSearch("");

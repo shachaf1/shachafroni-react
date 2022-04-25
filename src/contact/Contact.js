@@ -9,6 +9,16 @@ function Contact({kind, img, name, massages, funct}) {
         funct(name);
     }
 
+    var LastMassage = "";
+    if (massages!=[]){
+        if (massages[massages.length-1].type=='text'){
+            LastMassage = massages[massages.length-1].massageValue;
+        } else {
+            LastMassage = massages[massages.length-1].type;
+        }
+    }
+    
+
     
     return (
         <div>
@@ -19,7 +29,7 @@ function Contact({kind, img, name, massages, funct}) {
                 
                 <div className="about">
                     <div className="name">{name}</div>
-                    <div className="status" > <i className="fa fa-circle offline"></i> {massages[massages.length-1].massageStr} </div>
+                    <div className="status" > <i className="fa fa-circle offline"></i> {LastMassage} </div>
                 </div>
             </li>
           </div>

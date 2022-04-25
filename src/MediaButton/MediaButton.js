@@ -16,26 +16,31 @@ export default function MediaButton({massages,doSearch}) {
     const newMassageImage = function(){
         var today = new Date();
         const zeroPad = (num, places) => String(num).padStart(places, '0')
-        const massage = {author: "message-data",authort: "message my-message",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today'
-        ,massageValue: document.getElementById(image) ,type:'image'};
+        const massage = {author: "message-data float-right",authort: "message other-message float-right",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today'
+        ,massageValue: URL.createObjectURL(document.getElementById("image").files[0]) ,type:'image'};
+        console.log(massages);
         massages.push(massage);
+        console.log(massages);
+        doSearch("");
+        closeWindow();
     }
-    const newMassage = function(){
-        if( mode == 'image'){
-            newMassageImage();
-        }
-        doSearch('');
-        setOpen('false');
+
+    const newMassageVideo = function(){
+        var today = new Date();
+        const zeroPad = (num, places) => String(num).padStart(places, '0')
+        const massage = {author: "message-data float-right",authort: "message other-message float-right",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today'
+        ,massageValue: URL.createObjectURL(document.getElementById("video").files[0]) ,type:'video'};
+        console.log(massages);
+        massages.push(massage);
+        console.log(massages);
+        doSearch("");
+        closeWindow();
     }
+
+
+      
+
     
-
-
-
-
-
-
-
-
 
     const closeWindow = function(){
         setOpen(false);
@@ -48,7 +53,7 @@ export default function MediaButton({massages,doSearch}) {
                 <label  className="form-label">Add image</label>
                     <input type="file" accept="image/*" id="image"></input>
                     <div className="col">
-                        <button type="submit" id="send" className="btn btn-primary mb-3">send</button>
+                        <button type="submit" id="send" className="btn btn-primary mb-3" onClick={newMassageImage}>send</button>
                     </div>
             </div>
         )
@@ -59,7 +64,7 @@ export default function MediaButton({massages,doSearch}) {
                 <label  className="form-label">Add Video</label>
                     <input type="file" accept="video/*" id="video"></input>
                     <div className="col">
-                        <button type="submit" id="send" onClick={newMassage} className="btn btn-primary mb-3">send</button>
+                        <button type="submit" id="send"  className="btn btn-primary mb-3" onClick={newMassageVideo}>send</button>
                     </div>
             </div>
         )
@@ -80,7 +85,7 @@ export default function MediaButton({massages,doSearch}) {
                             <Nav.Link eventKey="link-1" onClick={()=>setMode(video)}>Video</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                            <Nav.Link eventKey="link-2" onClick={()=>setMode(<RecordPlayer/>)}>
+                            <Nav.Link eventKey="link-2" onClick={()=>setMode(<RecordPlayer massages={massages} doSearch={doSearch} closeWindow={closeWindow}/>)}>
                                 Record
                             </Nav.Link>
                         </Nav.Item>

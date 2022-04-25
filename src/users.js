@@ -1,13 +1,14 @@
+import icon from "./funTalking.jpg"
 var users = [{
     email: "shachaf@gmail.com",
     password: "12341234",
-    image: "../../public/funTalking.jpg",
+    image: 'https://bootdey.com/img/Content/avatar/avatar8.png',
     nickname: "shachaf1"
 },
 {
     email: "roni@gmail.com",
     password: "12341234",
-    image: "../../funTalking.jpg",
+    image: icon,
     nickname: "roni1"
 }
 ]
