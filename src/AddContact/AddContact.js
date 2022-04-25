@@ -11,7 +11,7 @@ import massages from "../massage/massages";
 
 
 
-export default function AddContact() {
+export default function AddContact({doSearch}) {
     const [open,setOpen] = useState(false);
     const openWindow = function(){
         setOpen(true);
@@ -30,8 +30,9 @@ export default function AddContact() {
         if (findings==null){
             alert("no such user");
         }
-        contacts.push({img: findings.image ,name: findings.nickname,kind:'clearfix',massages:[]})
+        contacts.push({img: findings.image ,name: findings.nickname,kind:'clearfix',massages:[""]})
         closeWindow();
+        doSearch("");
 
     }
 

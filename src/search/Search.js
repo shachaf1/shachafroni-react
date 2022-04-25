@@ -14,7 +14,7 @@ function Search({doSearch}){
                 
             </div>
             <input ref={searchBox} onKeyUp={search} type="text" className="form-control"   placeholder="Search..."></input>
-            <AddContact/>
+            <AddContact doSearch = {doSearch}/>
         </div>
 
     )

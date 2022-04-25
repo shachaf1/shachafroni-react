@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Massage from '.././massage/Massage';
 import '.././massage/Massage.css';
-import contacts from '../contact/contacts';
 import ContactListResult from '../contactListResult/ContactListResult';
 import massages from '../massage/massages';
 import Search from '../search/Search';
 import './Talk.css';
 import { ReactDOM } from 'react';
 import MediaButton from '../MediaButton/MediaButton';
-
+import contacts from '../contact/contacts';
 export default function Talk() {
     
 
@@ -19,21 +18,24 @@ export default function Talk() {
     
     const [contactList, setContactList] = useState(contacts);
     const doSearch = function(q){
-        setContactList(contacts.filter((contact) => contact.name.includes(q)));
+        if (contacts.length != 0){
+            setContactList(contacts.filter((contact) => contact.name.includes(q)));
+        }
     }
 
-    const [mainContact, setMainContact] = useState(contacts[1]);
+    const [mainContact, setMainContact] = useState(contacts[0]);
 
     const selectContact = function(q) {
         setMainContact(contacts.find(elem => elem.name===q));
     }
-    var MassageList= "";
-    if (mainContact.massages!=[]){
-     MassageList = mainContact.massages.map((massage,key) => {
+    if (mainContact.massages.length != 0){
+        var MassageList = mainContact.massages.map((massage,key) => {
         return <Massage author={massage.author} authort={massage.authort} clock ={massage.clock} massageValue={massage.massageValue} type ={massage.type} key={key} />
         });
     }
-    
+    else {
+        var MassageList= null;
+    }
     const [filler, setFiller] = useState(0);
     
 
@@ -42,7 +44,12 @@ export default function Talk() {
         var today = new Date();
         const zeroPad = (num, places) => String(num).padStart(places, '0')
         var newMassage= {author: "message-data float-right",authort: "message other-message float-right",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today',massageValue:str, type:'text'}; 
-        mainContact.massages.push(newMassage);
+        if(mainContact.massages == "") {
+            mainContact.massages = [newMassage];
+        }
+        else {
+            mainContact.massages.push(newMassage);
+        }
         document.getElementById("send").value="";
         doSearch("");
         return;

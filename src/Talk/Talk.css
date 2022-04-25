@@ -66,6 +66,7 @@ body{
     margin-left: 38%;
     border-left: 1px solid #1e1c1c;
     overflow-y: clip;
+    height: 100%;
     
 }
 
@@ -272,7 +273,7 @@ body{
         overflow-x: auto
     }
 }
-
+.
 @media only screen and (min-width: 768px) and (max-width: 992px) {
     .chat-app .chat-list {
         height: 650px;

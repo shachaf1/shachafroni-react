@@ -13,16 +13,17 @@ import Massage from './massage/Massage'
 import Contact from './contact/Contact';
 
 function App() {
+  const [contacts, setContacts] = useState([]);
   
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Login setConatcts={setContacts} />} />
           
           <Route path="/Register" element={<Register />} />
           
-          <Route path="/Talk" element={<Talk />} />
+          <Route path="/Talk" element={<Talk contacts={contacts}/>} />
           
         </Routes>
       </BrowserRouter>

@@ -2,10 +2,8 @@ import React from 'react'
 import './Login.css'
 import { useNavigate } from 'react-router-dom';
 import users from '../users';
-export default function Login() {
- 
-    
-
+import contacts from '../contact/contacts';
+export default function Login({setContacts}) {
 
     let navigate = useNavigate();
     const loginClicked = (e) => {
@@ -22,6 +20,10 @@ export default function Login() {
             alert("incorect nickname or password");
             return;
         }
+
+        //setContacts(contacts);
+
+        //console.log(contacts);
         navigate('/Talk');
         return false;
     }
