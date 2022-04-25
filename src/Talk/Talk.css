@@ -65,7 +65,7 @@ body{
 .chat-app .chat {
     margin-left: 38%;
     border-left: 1px solid #1e1c1c;
-    overflow-y: auto;
+    overflow-y: clip;
     
 }
 
@@ -118,7 +118,7 @@ body{
 }
 
 .chat .chat-header {
-    padding: 5% 5%;
+    padding: 2% 2%;
     border-bottom: 2px solid #f4f7f6
 }
 
@@ -141,7 +141,7 @@ body{
     padding-top: 2%;
     border-bottom: 2px solid #fff;
     overflow-y: scroll;
-    height: 50%;
+    height: 70%;
 
 }
 
@@ -260,10 +260,12 @@ body{
         left: 0
     }
     .chat-app .chat {
-        margin: 0
+        margin: 0;
+        
     }
     .chat-app .chat .chat-header {
-        border-radius: 0.55rem 0.55rem 0 0
+        border-radius: 0.55rem 0.55rem 0 0;
+        
     }
     .chat-app .chat-history {
         height: 300px;

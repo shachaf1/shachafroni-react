@@ -8,6 +8,7 @@ import massages from '../massage/massages';
 import Search from '../search/Search';
 import './Talk.css';
 import { ReactDOM } from 'react';
+import MediaButton from '../MediaButton/MediaButton';
 
 export default function Talk() {
     
@@ -27,7 +28,7 @@ export default function Talk() {
         setMainContact(contacts.find(elem => elem.name===q));
     }
     var MassageList = mainContact.massages.map((massage,key) => {
-        return <Massage author={massage.author} authort={massage.authort} clock ={massage.clock} massageStr={massage.massageStr} key={key} />
+        return <Massage author={massage.author} authort={massage.authort} clock ={massage.clock} massageValue={massage.massageValue} type ={massage.type} key={key} />
         });
     
     const [filler, setFiller] = useState(0);
@@ -44,6 +45,13 @@ export default function Talk() {
         return;
     };
 
+    
+    const _handleKeyDown = (e) => {
+          if (e.key === 'Enter') {
+            send();
+          }
+        }
+      
 
     // useEffect(() => {
     //     document.getElementById('output').innerHTML = user.userChat[0].massageStr;
@@ -104,7 +112,8 @@ export default function Talk() {
                                         <div className="input-group-prepend">
                                             <span className="input-group-text"><i className="fa fa-send" type="submit" onClick={send}>send</i></span>
                                         </div>
-                                        <input type="text" id ="send" className="form-control" placeholder="Enter text here..."></input>
+                                        <input type="text" id ="send" onKeyDown={_handleKeyDown} className="form-control" placeholder="Enter text here..."></input>
+                                        <MediaButton />
                                     </div>
                                 </div>
                             </div>
