@@ -4,14 +4,39 @@ import { Nav } from "react-bootstrap";
 
 import music from './Swan Lake Ballet (Music).mp3'
 import RecordPlayer from "../Record/RecordPlayer";
+import { getElementError } from "@testing-library/react";
 
 
 
-export default function MediaButton(params) {
+export default function MediaButton({massages,doSearch}) {
     const [open,setOpen] = useState(false);
     const openWindow = function(){
         setOpen(true);
     }
+    const newMassageImage = function(){
+        var today = new Date();
+        const zeroPad = (num, places) => String(num).padStart(places, '0')
+        const massage = {author: "message-data",authort: "message my-message",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today'
+        ,massageValue: document.getElementById(image) ,type:'image'};
+        massages.push(massage);
+    }
+    const newMassage = function(){
+        if( mode == 'image'){
+            newMassageImage();
+        }
+        doSearch('');
+        setOpen('false');
+    }
+    
+
+
+
+
+
+
+
+
+
     const closeWindow = function(){
         setOpen(false);
         setMode(null);
@@ -34,7 +59,7 @@ export default function MediaButton(params) {
                 <label  className="form-label">Add Video</label>
                     <input type="file" accept="video/*" id="video"></input>
                     <div className="col">
-                        <button type="submit" id="send" className="btn btn-primary mb-3">send</button>
+                        <button type="submit" id="send" onClick={newMassage} className="btn btn-primary mb-3">send</button>
                     </div>
             </div>
         )

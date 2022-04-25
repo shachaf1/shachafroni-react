@@ -113,7 +113,7 @@ export default function Talk() {
                                             <span className="input-group-text"><i className="fa fa-send" type="submit" onClick={send}>send</i></span>
                                         </div>
                                         <input type="text" id ="send" onKeyDown={_handleKeyDown} className="form-control" placeholder="Enter text here..."></input>
-                                        <MediaButton />
+                                        <MediaButton massages={mainContact.massages} doSearch = {doSearch} />
                                     </div>
                                 </div>
                             </div>
