@@ -1,6 +1,7 @@
 
 import {useRef} from 'react';
 import AddContact from '../AddContact/AddContact';
+import './Search.css'
 
 function Search({doSearch}){
    const searchBox = useRef(null);
@@ -8,14 +9,16 @@ function Search({doSearch}){
     const search = function(){
         doSearch(searchBox.current.value);
     }
-    return(
+    return (
+
         <div className="input-group">
-            <div className="input-group-prepend">
-                
+            <div >
+                <input ref={searchBox} onKeyUp={search} type="text" className="form-control" placeholder="Search..."></input>
+
+                <AddContact doSearch={doSearch} />
             </div>
-            <input ref={searchBox} onKeyUp={search} type="text" className="form-control"   placeholder="Search..."></input>
-            <AddContact doSearch = {doSearch}/>
         </div>
+
 
     )
 }

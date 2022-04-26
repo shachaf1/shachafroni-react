@@ -10,6 +10,7 @@ import { ReactDOM } from 'react';
 import MediaButton from '../MediaButton/MediaButton';
 import funTalking from './funTalking.jpg';
 import userContacts from '../userContacts';
+import AddContact from '../AddContact/AddContact';
 export default function Talk() {
 
     const [contactList, setContactList] = useState(userContacts);

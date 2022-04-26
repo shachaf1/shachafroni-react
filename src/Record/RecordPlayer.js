@@ -11,14 +11,20 @@ export default function RecordPlayer({massages,doSearch,closeWindow}) {
         doSearch("");
         closeWindow();
     }
-       
-        
+
+
     return (
         <div>
-            <button onClick={startRecording} disabled={isRecording}>start</button>
-            <button onClick={stopRecording} disabled={!isRecording}>stop</button>
-            <audio src={audioURL} controls />
-            <button onClick={newMassageAudio}>send</button>
+            <p>
+                <button class="btn btn-danger" onClick={startRecording} disabled={isRecording}>start</button>
+                <button class="btn btn-danger" onClick={stopRecording} disabled={!isRecording}>stop</button>
+            </p>
+            <p>
+                <audio class="btn btn-danger" src={audioURL} controls />
+            </p>
+            <p>
+                <button class="btn btn-primary" onClick={newMassageAudio}>send</button>
+            </p>
         </div>
     )
 }
