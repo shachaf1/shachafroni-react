@@ -1,7 +1,7 @@
 import { useState } from "react"
 import './MediaButton.css' 
 import { Nav } from "react-bootstrap";
-
+import userContacts from "../userContacts";
 import music from './Swan Lake Ballet (Music).mp3'
 import RecordPlayer from "../Record/RecordPlayer";
 import { getElementError } from "@testing-library/react";
@@ -14,6 +14,11 @@ export default function MediaButton({massages,doSearch}) {
         setOpen(true);
     }
     const newMassageImage = function(){
+        if(userContacts.length == 0){
+            doSearch("");
+            closeWindow();
+            return;
+        }
         var today = new Date();
         const zeroPad = (num, places) => String(num).padStart(places, '0')
         const massage = {author: "message-data float-right",authort: "message other-message float-right",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today'
@@ -24,6 +29,11 @@ export default function MediaButton({massages,doSearch}) {
     }
 
     const newMassageVideo = function(){
+        if(userContacts.length == 0){
+            doSearch("");
+            closeWindow();
+            return;
+        }
         var today = new Date();
         const zeroPad = (num, places) => String(num).padStart(places, '0')
         const massage = {author: "message-data float-right",authort: "message other-message float-right",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today'

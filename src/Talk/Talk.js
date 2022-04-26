@@ -8,6 +8,7 @@ import Search from '../search/Search';
 import './Talk.css';
 import { ReactDOM } from 'react';
 import MediaButton from '../MediaButton/MediaButton';
+import funTalking1 from './funTalking1.jpg';
 import funTalking from './funTalking.jpg';
 import userContacts from '../userContacts';
 import AddContact from '../AddContact/AddContact';
@@ -49,7 +50,13 @@ export default function Talk() {
     
 
     const send = function(){
-        
+        var objDiv = document.getElementById("chat-history");
+        objDiv.scrollTop = objDiv.scrollHeight;
+
+        if(document.getElementById("send").value ==""){
+            doSearch("");
+            return;
+        }
         if(mainContact.name == 'no chats yet') {
             document.getElementById("send").value="";
             doSearch("");
@@ -90,7 +97,9 @@ export default function Talk() {
 
 
     return (
+        
         <div className='Talk-div'>
+        <img className="logo" src={funTalking1} alt="image"/>
             <nav className="navbar navbar-light bg-light">
                 <div className="container-fluid">
                     <div className="navbar-brand" href="#"  >
@@ -125,7 +134,7 @@ export default function Talk() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="chat-history">
+                                <div className="chat-history" id="chat-history">
                                     <ul className="m-b-0">
                                         
                                         {MassageList}

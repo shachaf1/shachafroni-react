@@ -1,7 +1,14 @@
 .register-class {
     background-image: url('../../public/funTalking.jpg');
 }
-
+.logo{
+  position:fixed !important;
+  bottom: 10%;
+  width: 10%;
+  left:5%;
+  box-shadow: 30px 20px #05050572;
+  border-radius:20%;
+}
 form {
     font-style: italic;
     height: 580px;

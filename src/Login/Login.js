@@ -6,6 +6,7 @@ import contactsRoni from '../contact/contactsRoni';
 import giladContacts from '../contact/giladContacts';
 import shachafContacts from '../contact/shachafContacts';
 import userContacts from '../userContacts';
+import funTalking1 from './funTalking1.jpg';
 export default function Login() {
     let navigate = useNavigate();
     const loginClicked = function() {
@@ -58,6 +59,7 @@ export default function Login() {
     return (
         
         <div className='login-class'>
+        <img className="logo" src={funTalking1} alt="image"/>
             <nav className="navbar navbar-light bg-light">
                 <div className="container-fluid">
                     <div className="navbar-brand" href="#"   >
