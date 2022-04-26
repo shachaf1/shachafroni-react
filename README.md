@@ -5,16 +5,22 @@ run
 npm start
 ```
 the first screen is the login screen, if the user already registered he can log in with his nickname and password or he can click the register button and register with a new user.
+
 the password must be 7-16 characters and contain only letters and digits.
 after registirtion he needs to sign in and then he gets to a new epty chat box where he can add existing cotacts.
 
 # users and passwords
 
-in the system we have three registerd users - 
+in the system we have three registerd users:
+
 roni1 - 12341234, roni@gmail.com
+
 shachaf1 - 12341234, shachaf@gmail.com
+
 gilad1 - 12341234, gilad@gmail.com
+
 to send massage to a new contact we need to add him by the mail.
+
 they all have a different contacts and massage history.
 
 # librarys and settings
