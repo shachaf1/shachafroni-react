@@ -8,41 +8,57 @@ import Search from '../search/Search';
 import './Talk.css';
 import { ReactDOM } from 'react';
 import MediaButton from '../MediaButton/MediaButton';
-import contacts from '../contact/contacts';
+import funTalking from './funTalking.jpg';
+import userContacts from '../userContacts';
 export default function Talk() {
+
+    const [contactList, setContactList] = useState(userContacts);
+    if(userContacts.length != 0){
+        var tempContact = userContacts[0];
+    }
+    else{
+        var tempContact ={img: funTalking,name: 'no chats yet',kind:'clearfix',massages: [""]};
+    }
+    const [mainContact, setMainContact] = useState(tempContact);
     
-
-
-
-
-    
-    const [contactList, setContactList] = useState(contacts);
     const doSearch = function(q){
-        if (contacts.length != 0){
-            setContactList(contacts.filter((contact) => contact.name.includes(q)));
+        if (userContacts.length != 0){
+            setContactList(userContacts.filter((contact) => contact.name.includes(q)));
+        }
+        else {
+            setContactList(null);
         }
     }
-
-    const [mainContact, setMainContact] = useState(contacts[0]);
-
+    
+    
     const selectContact = function(q) {
-        setMainContact(contacts.find(elem => elem.name===q));
+        setMainContact(userContacts.find(elem => elem.name===q));
     }
+
     if (mainContact.massages.length != 0){
         var MassageList = mainContact.massages.map((massage,key) => {
         return <Massage author={massage.author} authort={massage.authort} clock ={massage.clock} massageValue={massage.massageValue} type ={massage.type} key={key} />
         });
     }
+
     else {
-        var MassageList= null;
+        var MassageList= null;        
     }
     const [filler, setFiller] = useState(0);
     
 
     const send = function(){
+        
+        if(mainContact.name == 'no chats yet') {
+            document.getElementById("send").value="";
+            doSearch("");
+            alert("no chats yet");
+            return;
+        }
         var str = document.getElementById("send").value;
         var today = new Date();
-        const zeroPad = (num, places) => String(num).padStart(places, '0')
+        const zeroPad = (num, places) => String(num).padStart(places, '0');
+
         var newMassage= {author: "message-data float-right",authort: "message other-message float-right",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today',massageValue:str, type:'text'}; 
         if(mainContact.massages == "") {
             mainContact.massages = [newMassage];
@@ -52,6 +68,7 @@ export default function Talk() {
         }
         document.getElementById("send").value="";
         doSearch("");
+
         return;
     };
 
@@ -97,10 +114,9 @@ export default function Talk() {
                                 <div className="chat-header clearfix">
                                     <div className="row">
                                         <div className="col-lg-6">
-                                            <img src={mainContact.img} alt="avatar"></img>
+                                            <img className='imag' src={mainContact.img} alt="avatar"></img>
                                             <div className="chat-about">
                                                 <h6  className="m-b-0">{mainContact.name}</h6>
-                                                <small>Last seen: 2 hours ago</small>
                                             </div>
                                         </div>
                                         <div className="col-lg-6 hidden-sm text-right">

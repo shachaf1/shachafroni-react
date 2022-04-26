@@ -3,13 +3,15 @@ import './Login.css'
 import { useNavigate } from 'react-router-dom';
 import users from '../users';
 import contacts from '../contact/contacts';
-export default function Login({setContacts}) {
-
+import userContacts from '../userContacts';
+export default function Login() {
     let navigate = useNavigate();
-    const loginClicked = (e) => {
+    const loginClicked = function() {
         var password = document.getElementById("password").value;
         var nickname = document.getElementById("nickname").value;
         var usernum = -1;
+
+
         for (let i = 0; i < users.length; i++) {
             if (nickname == users[i].nickname && password == users[i].password) {
                 usernum = i;
@@ -20,10 +22,11 @@ export default function Login({setContacts}) {
             alert("incorect nickname or password");
             return;
         }
+        contacts.forEach(contact => {
+            userContacts.push(contact);
+            
+        });
 
-        //setContacts(contacts);
-
-        //console.log(contacts);
         navigate('/Talk');
         return false;
     }
@@ -53,7 +56,7 @@ export default function Login({setContacts}) {
                     <label  className="form-label">Password</label>
                     <input type="password" className="form-control" id="password"></input>
                     <div className="col">
-                        <button type="submit"  id="login" className="btn btn-primary"><a className=" btn-primary" onClick={loginClicked}>login</a> </button>
+                        <button type="submit"  id="login" className="btn btn-primary" onClick={loginClicked}>login</button>
                     </div>
                     <label  className="form-label">not registered?</label>
                     <button   className="register-button"><a href= "\Register" className="link-primary">click here</a></button>

@@ -25,7 +25,7 @@ function Contact({kind, img, name, massages, funct}) {
             
             <li className={kind} onClick={foo2}>
                 
-                <img src={img}></img>
+                <img className='imag' src={img}></img>
                 
                 <div className="about">
                     <div className="name">{name}</div>

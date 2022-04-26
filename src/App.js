@@ -19,11 +19,11 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login setConatcts={setContacts} />} />
+          <Route path="/" element={<Login/>} />
           
           <Route path="/Register" element={<Register />} />
           
-          <Route path="/Talk" element={<Talk contacts={contacts}/>} />
+          <Route path="/Talk" element={<Talk/>} />
           
         </Routes>
       </BrowserRouter>

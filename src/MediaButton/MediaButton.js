@@ -18,9 +18,7 @@ export default function MediaButton({massages,doSearch}) {
         const zeroPad = (num, places) => String(num).padStart(places, '0')
         const massage = {author: "message-data float-right",authort: "message other-message float-right",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today'
         ,massageValue: URL.createObjectURL(document.getElementById("image").files[0]) ,type:'image'};
-        console.log(massages);
         massages.push(massage);
-        console.log(massages);
         doSearch("");
         closeWindow();
     }
@@ -30,9 +28,7 @@ export default function MediaButton({massages,doSearch}) {
         const zeroPad = (num, places) => String(num).padStart(places, '0')
         const massage = {author: "message-data float-right",authort: "message other-message float-right",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today'
         ,massageValue: URL.createObjectURL(document.getElementById("video").files[0]) ,type:'video'};
-        console.log(massages);
         massages.push(massage);
-        console.log(massages);
         doSearch("");
         closeWindow();
     }

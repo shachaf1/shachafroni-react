@@ -3,7 +3,7 @@ import '../MediaButton/MediaButton.css'
 import './AddContact.css'
 import { Nav } from "react-bootstrap";
 import users from '.././users.js'
-import contacts from "../contact/contacts";
+import userContacts from "../userContacts";
 import massages from "../massage/massages";
 
 
@@ -30,7 +30,7 @@ export default function AddContact({doSearch}) {
         if (findings==null){
             alert("no such user");
         }
-        contacts.push({img: findings.image ,name: findings.nickname,kind:'clearfix',massages:[""]})
+        userContacts.push({img: findings.image ,name: findings.nickname,kind:'clearfix',massages:[""]})
         closeWindow();
         doSearch("");
 

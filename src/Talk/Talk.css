@@ -9,6 +9,13 @@ body{
 .send{
     position: absolute;
 }
+
+.imag {
+    object-fit: cover;
+
+    aspect-ratio: 1;
+  }
+
 .navbar-brand{
     top: 0%;
     position:absolute ;

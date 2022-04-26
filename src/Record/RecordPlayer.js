@@ -7,9 +7,7 @@ export default function RecordPlayer({massages,doSearch,closeWindow}) {
         const zeroPad = (num, places) => String(num).padStart(places, '0')
         const massage = {author: "message-data float-right",authort: "message other-message float-right",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today'
         ,massageValue: audioURL ,type:'audio'};
-        console.log(massages);
         massages.push(massage);
-        console.log(massages);
         doSearch("");
         closeWindow();
     }
