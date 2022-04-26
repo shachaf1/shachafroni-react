@@ -2,7 +2,9 @@ import React from 'react'
 import './Login.css'
 import { useNavigate } from 'react-router-dom';
 import users from '../users';
-import contacts from '../contact/contacts';
+import contactsRoni from '../contact/contactsRoni';
+import giladContacts from '../contact/giladContacts';
+import shachafContacts from '../contact/shachafContacts';
 import userContacts from '../userContacts';
 export default function Login() {
     let navigate = useNavigate();
@@ -22,11 +24,28 @@ export default function Login() {
             alert("incorect nickname or password");
             return;
         }
-        contacts.forEach(contact => {
-            userContacts.push(contact);
-            
-        });
-
+        
+        if(nickname == 'roni1')
+        {
+            contactsRoni.forEach(contact => {
+                userContacts.push(contact);
+                
+            });
+        }
+        if(nickname == 'gilad1')
+        {
+            giladContacts.forEach(contact => {
+                userContacts.push(contact);
+                
+            });
+        }
+        if(nickname == 'shachaf1')
+        {
+            shachafContacts.forEach(contact => {
+                userContacts.push(contact);
+                
+            });
+        }
         navigate('/Talk');
         return false;
     }

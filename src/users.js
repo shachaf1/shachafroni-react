@@ -10,6 +10,12 @@ var users = [{
     password: "12341234",
     image: icon,
     nickname: "roni1"
+},
+{
+    email: "gilad@gmail.com",
+    password: "12341234",
+    image: icon,
+    nickname: "gilad1"
 }
 ]
 
