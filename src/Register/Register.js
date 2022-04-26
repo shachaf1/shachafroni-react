@@ -1,5 +1,5 @@
 import './Register.css'
-
+import funTalking1 from './funTalking1.jpg'
 import React from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
 import users from '../users';
@@ -76,6 +76,7 @@ function Register() {
 
     return (
         <div className='register-className'>
+        <img className="logo" src={funTalking1} alt="image"/>
             <nav className="navbar navbar-light bg-light">
                 <div className="container-fluid">
                     <div className="navbar-brand" href="#" >

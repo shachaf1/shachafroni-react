@@ -11,6 +11,7 @@ import Register from './Register/Register';
 import Talk from './Talk/Talk';
 import Massage from './massage/Massage'
 import Contact from './contact/Contact';
+import funTalking from './funTalking1.jpg'
 
 function App() {
   const [contacts, setContacts] = useState([]);

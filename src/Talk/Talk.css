@@ -1,7 +1,14 @@
 .Talk-div {
     background-image: url('../../public/funTalking.jpg');
 }
-
+.logo{
+  position:fixed !important;
+  bottom: 10%;
+  width: 10%;
+  left:5%;
+  box-shadow: 30px 20px #05050572;
+  border-radius:20%;
+}
 body{
     background-color: #f4f7f6;
     margin-top:0%;
@@ -18,9 +25,10 @@ body{
 
 .navbar-brand{
     top: 0%;
+    left:0%;
     position:absolute ;
     background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 37%, rgba(0,212,255,1) 100%);
+    background: linear-gradient(90deg, rgb(8, 8, 8) 0%, rgb(98, 98, 103) 37%, rgb(233, 238, 239) 100%);
     width: 100%;
     height: 1000%;
     font-style: italic;
@@ -36,7 +44,7 @@ body{
 .card {
     left: 20%;
     top: 15%;
-    background: rgb(247, 181, 95);
+    background: rgb(164, 161, 158);
     transition: .5s;
     border: 0;
     margin-bottom: 20%;

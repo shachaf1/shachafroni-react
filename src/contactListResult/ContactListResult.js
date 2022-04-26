@@ -3,7 +3,7 @@ function ContactListResult({contacts,selectContact}){
     const foo = function (q) {
         selectContact(q)
     }
-    if(contacts.length != 0) {
+    if(contacts!=null) {
         var ContactList = contacts.map((contact,key) => {
             return <Contact {...contact} key={key} funct={foo}/>
         });
