@@ -6,7 +6,7 @@ import contactsRoni from '../contact/contactsRoni';
 import giladContacts from '../contact/giladContacts';
 import shachafContacts from '../contact/shachafContacts';
 import userContacts from '../userContacts';
-import funTalking1 from './funTalking1.jpg';
+import funTalking1 from './images.png';
 export default function Login() {
     let navigate = useNavigate();
     const loginClicked = function() {
@@ -62,8 +62,8 @@ export default function Login() {
         <img className="logo" src={funTalking1} alt="image"/>
             <nav className="navbar navbar-light bg-light">
                 <div className="container-fluid">
-                    <div className="navbar-brand" href="#"   >
-                        fun talking
+                    <div className="navbar-brand" href="#"  style={{ color: "white" }} >
+                        Chat!
                     </div>
                 </div>
             </nav>

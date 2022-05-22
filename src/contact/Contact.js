@@ -28,7 +28,7 @@ function Contact({kind, img, name, massages, funct}) {
                 <img className='imag' src={img}></img>
                 
                 <div className="about">
-                    <div className="name">{name}</div>
+                    <div className="name" style={{fontWeight:"normal",font:"italic", fontSize:"x-large" }}>{name}</div>
                     <div className="status" > <i className="fa fa-circle offline"></i> {LastMassage} </div>
                 </div>
             </li>

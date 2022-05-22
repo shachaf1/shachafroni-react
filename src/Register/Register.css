@@ -4,22 +4,25 @@
 .logo{
   position:fixed !important;
   bottom: 10%;
-  width: 10%;
-  left:5%;
-  box-shadow: 30px 20px #05050572;
-  border-radius:20%;
+  width: 200%;
+  left:1%;
+  top: 65%;
+  border-radius:50%;
 }
 form {
     font-style: italic;
-    height: 580px;
-    width: 50%;
+    color: black;
+    font-size: x-large;
+    font-weight: 600;
+    height: 760px;
+    width: 40%;
     top: 200px;
-    left: 30px;
+    left: -9%;
     position: absolute;
     margin-left: 25%;
-    margin-bottom: 5%;
+    margin-bottom: 20%;
     padding: 2%;
-    background-color: rgb(160, 159, 159);
+    background-color: rgba(203, 209, 235, 0.838);;
     border-radius: 5%;
 
 }
@@ -55,4 +58,11 @@ form {
 
 .login-button {
     border: 0ch;
+}
+.wellcome{
+  top:30%;
+  left: 64%;
+  width: 30%;
+  position: absolute;
+  border-radius: 50%;
 }

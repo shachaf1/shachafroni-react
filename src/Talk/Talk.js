@@ -8,7 +8,7 @@ import Search from '../search/Search';
 import './Talk.css';
 import { ReactDOM } from 'react';
 import MediaButton from '../MediaButton/MediaButton';
-import funTalking1 from './funTalking1.jpg';
+import funTalking1 from './images.png';
 import funTalking from './funTalking.jpg';
 import userContacts from '../userContacts';
 import AddContact from '../AddContact/AddContact';
@@ -102,8 +102,8 @@ export default function Talk() {
         <img className="logo" src={funTalking1} alt="image"/>
             <nav className="navbar navbar-light bg-light">
                 <div className="container-fluid">
-                    <div className="navbar-brand" href="#"  >
-                        fun talking
+                    <div className="navbar-brand" href="#" style={{ color: "white" }} >
+                        Chat!
                     </div>
                 </div>
             </nav>
@@ -126,7 +126,7 @@ export default function Talk() {
                                         <div className="col-lg-6">
                                             <img className='imag' src={mainContact.img} alt="avatar"></img>
                                             <div className="chat-about">
-                                                <h6  className="m-b-0">{mainContact.name}</h6>
+                                                <h6  className="m-b-0" >{mainContact.name}</h6>
                                             </div>
                                         </div>
                                         <div className="col-lg-6 hidden-sm text-right">
