@@ -12,6 +12,7 @@ import funTalking1 from './images.png';
 import funTalking from './funTalking.jpg';
 import userContacts from '../userContacts';
 import AddContact from '../AddContact/AddContact';
+import axios from 'axios';
 export default function Talk() {
 
     const [contactList, setContactList] = useState(userContacts);
@@ -22,8 +23,24 @@ export default function Talk() {
         var tempContact ={img: funTalking,name: 'no chats yet',kind:'clearfix',massages: [""]};
     }
     const [mainContact, setMainContact] = useState(tempContact);
+
+    
     
     const doSearch = function(q){
+
+
+       
+        //console.log(retStatus.Authorization);
+
+        
+
+        //fetch('https://localhost:7125/api/User?username=didi&password=2',{method:'POST'}).then(res => console.log(Response));
+        //console.log(token);
+        
+       
+
+
+        //here can we make some refresh for contacts.
         if (userContacts.length != 0){
             setContactList(userContacts.filter((contact) => contact.name.includes(q)));
         }
@@ -31,6 +48,11 @@ export default function Talk() {
             setContactList(null);
         }
     }
+
+    
+
+
+
     
     
     const selectContact = function(q) {
@@ -86,6 +108,8 @@ export default function Talk() {
             send();
           }
         }
+
+
       
 
     // useEffect(() => {
@@ -97,6 +121,8 @@ export default function Talk() {
 
 
     return (
+
+        
         
         <div className='Talk-div'>
         <img className="logo" src={funTalking1} alt="image"/>

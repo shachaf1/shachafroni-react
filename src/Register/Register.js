@@ -70,6 +70,7 @@ function Register() {
             return;
         }
         users.push(user);
+        //fetch new contact
         
         navigate('/');
         return;
