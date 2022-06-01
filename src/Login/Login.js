@@ -11,6 +11,8 @@ import funTalking1 from './images.png';
 import axios from 'axios';
 import Contact from '../contact/Contact';
 import Massage from '../massage/Massage';
+import $ from "jquery";
+
 export default function Login() {
     let navigate = useNavigate();
     const [token, setToken] = useState(-1);
