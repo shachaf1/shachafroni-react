@@ -15,7 +15,52 @@ import AddContact from '../AddContact/AddContact';
 import axios from 'axios';
 export default function Talk() {
 
+    
+
     const [contactList, setContactList] = useState(userContacts);
+    const [config,setConfig] = useState({
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
+        }
+      });
+    const asyncCall = async (apiContacts) => {
+        if (Array.isArray(apiContacts)){
+            await Array(apiContacts).forEach(async element => {
+                
+                const apimessages = await axios.get('https://localhost:7125/Contacts/' + element['id'] + '/messages', config);
+                const messages = [];
+                Array(apimessages).forEach(async element => {
+                    let author;
+                    let authort;
+                    if (element.isOneSend) {
+                        author = "message-data";
+                        authort = "message my-message";
+                    } else {
+                        author = "message-data float-right";
+                        authort = "message my-message float-right";
+                    }
+                    messages.push(new Massage(author, authort, element['sendTime'], element['content'], 'text'));
+                })
+                userContacts.push({img: 'https://bootdey.com/img/Content/avatar/avatar8.png',name: element['nickname'],kind:'clearfix',massages: massages})
+    
+    
+            })
+        }
+        
+    }
+    useEffect(()=>{
+        
+        var config = {
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
+            }
+          }
+        const apiContacts = axios.get('https://localhost:7125/Contacts',config)
+        //.then( res => res.json())
+        .then(res=>asyncCall(res.data))
+        .then(()=>setContactList(userContacts));
+
+    })
     if(userContacts.length != 0){
         var tempContact = userContacts[0];
     }
@@ -29,14 +74,7 @@ export default function Talk() {
     const doSearch = function(q){
 
 
-       
-        //console.log(retStatus.Authorization);
 
-        
-
-        //fetch('https://localhost:7125/api/User?username=didi&password=2',{method:'POST'}).then(res => console.log(Response));
-        //console.log(token);
-        
        
 
 

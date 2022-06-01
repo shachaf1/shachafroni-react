@@ -13,55 +13,63 @@ import Contact from '../contact/Contact';
 import Massage from '../massage/Massage';
 export default function Login() {
     let navigate = useNavigate();
-    const [token, setToken] = useState(null);
-    const loginClicked = function() {
+    const [token, setToken] = useState(-1);
+    const loginClicked = function(e) {
+        e.preventDefault();
         var password = document.getElementById("password").value;
         var nickname = document.getElementById("nickname").value;
         var usernum = -1;
+
+        axios.post('https://localhost:7125/api/User?username='+nickname+'&password='+password)
+        .then(response => {
+            if (response.data != null) {
+                localStorage.setItem('jwtToken', response.data);
+                navigate('/Talk')
+                setToken(0);
+                //this.setState({ redirect: true });
+            } else {
+                alert("incorect nickname or password");
+                return;
+
+            }
+        })
         //validations here by server.
         //push contacts to userContacts.
 
-        const retStatus = axios.post('https://localhost:7125/api/User?username='+nickname+'&password='+password).then((res) => setToken(res.data));
+        // const retStatus = axios.post('https://localhost:7125/api/User?username='+nickname+'&password='+password).then((res) => setToken(res.data));
 
-        let config = {
-            headers: {
-              'Authorization': 'Bearer ' + token
-            }
-          }
-        const apiContacts = axios.get('https://localhost:7125/Contacts',config).then( res => res.json());
-        if (apiContacts.ok){
-            usernum = 0;
-        }
-
-        apiContacts.array.forEach(element => {
-            const apimessages = axios.get('https://localhost:7125/Contacts/'+element.Id+'/messages',config).json();
-            const messages = [];
-            apimessages.forEach(element => {
-                let author;
-                let authort;
-                if (element.isOneSend){
-                    author = "message-data";
-                    authort = "message my-message";
-                } else {
-                    author = "message-data float-right";
-                    authort = "message my-message float-right"; 
-                }
-                messages.push(new Massage(author,authort,element.sendTime,element.content,'text'))
-            })
-            userContacts.push(new Contact('clearfix',null,element.nickname, messages))
-        });
-
-
-        // for (let i = 0; i < users.length; i++) {
-        //     if (nickname == users[i].nickname && password == users[i].password) {
-        //         usernum = i;
+        // let config = {
+        //     headers: {
+        //       'Authorization': 'Bearer ' + token
         //     }
+        //   }
+        // const apiContacts = axios.get('https://localhost:7125/Contacts',config).then( res => res.json()).then(res => console.log(res));
+        // if (apiContacts.ok){
+        //     usernum = 0;
         // }
+
+        // apiContacts.array.forEach(element => {
+        //     const apimessages = axios.get('https://localhost:7125/Contacts/'+element.Id+'/messages',config).json();
+        //     const messages = [];
+        //     apimessages.forEach(element => {
+        //         let author;
+        //         let authort;
+        //         if (element.isOneSend){
+        //             author = "message-data";
+        //             authort = "message my-message";
+        //         } else {
+        //             author = "message-data float-right";
+        //             authort = "message my-message float-right"; 
+        //         }
+        //         messages.push(new Massage(author,authort,element.sendTime,element.content,'text'))
+        //     })
+        //     userContacts.push(new Contact('clearfix',null,element.nickname, messages))
+        // });
+
         
-        if (usernum == -1) {
-            alert("incorect nickname or password");
-            return;
-        }
+        if (token ==-1) {
+            
+        } 
         
         // if(nickname == 'roni1')
         // {
@@ -84,8 +92,7 @@ export default function Login() {
                 
         //     });
         // }
-        navigate('/Talk');
-        return false;
+        
     }
 
     const RegisterClicked = (e) => {
