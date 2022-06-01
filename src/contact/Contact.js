@@ -1,5 +1,6 @@
 import './Contact.css'
-function Contact({kind, img, name, massages, funct}) {
+import icon from "./funTalking.jpg"
+function Contact({id, name, server, last, lastDate, funct}) {
     
     // const chosen =function(params) {
     //     props.handleMain(params);
@@ -9,27 +10,27 @@ function Contact({kind, img, name, massages, funct}) {
         funct(name);
     }
 
-    var LastMassage = "";
-    if (massages!=[]){
-        if (massages[massages.length-1].type=='text'){
-            LastMassage = massages[massages.length-1].massageValue;
-        } else {
-            LastMassage = massages[massages.length-1].type;
-        }
-    }
+    var LastMassage = last;
+    // if (massages!=[]){
+    //     if (massages[massages.length-1].type=='text'){
+    //         LastMassage = massages[massages.length-1].massageValue;
+    //     } else {
+    //         LastMassage = massages[massages.length-1].type;
+    //     }
+    // }
     
 
-    
     return (
         <div>
             
-            <li className={kind} onClick={foo2}>
+            <li className={"clearfix"} onClick={foo2}>
                 
-                <img className='imag' src={img}></img>
+                <img className='imag' src={icon}></img>
                 
                 <div className="about">
                     <div className="name" style={{fontWeight:"normal",font:"italic", fontSize:"x-large" }}>{name}</div>
                     <div className="status" > <i className="fa fa-circle offline"></i> {LastMassage} </div>
+                    <div className="status" > <i className="fa fa-circle offline"></i> {lastDate} </div>
                 </div>
             </li>
           </div>
