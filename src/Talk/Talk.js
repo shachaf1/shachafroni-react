@@ -15,6 +15,7 @@ import AddContact from '../AddContact/AddContact';
 import axios from 'axios';
 export default function Talk() {
 
+    const [userContacts,setUserContacts] = useState([]);
     const [contactList, setContactList] = useState(userContacts);
     const [config,setConfig] = useState({
         headers: {
@@ -55,17 +56,20 @@ export default function Talk() {
             }
           }
         const apiContacts = axios.get('https://localhost:7125/Contacts',config)
-        //.then( res => res.json())
-        // .then(res=>asyncCall(res.data))
-        .then(res => userContacts=res);
-    })
-    if(userContacts.length != 0){
-        var tempContact = userContacts[0];
-    }
-    else{
-        var tempContact ={img: funTalking,name: 'no chats yet',kind:'clearfix',massages: [""]};
-    }
-    const [mainContact, setMainContact] = useState(tempContact);
+        .then(res => setUserContacts(JSON.parse(JSON.stringify(res.data))))
+        .then(()=>{
+            if(userContacts.length != 0){
+                //setMainContact(userContacts[0]);
+            }
+            else{
+                var tempContact ={img: funTalking,name: 'no chats yet',kind:'clearfix',massages: [""]};
+                setMainContact(tempContact);
+            }
+
+        })
+    },[])
+    
+    const [mainContact, setMainContact] = useState({img: funTalking,name: 'no chats yet',kind:'clearfix',massages: [""]});
 
     
     
@@ -148,9 +152,6 @@ export default function Talk() {
 
 
     return (
-
-        
-        
         <div className='Talk-div'>
         <img className="logo" src={funTalking1} alt="image"/>
             <nav className="navbar navbar-light bg-light">

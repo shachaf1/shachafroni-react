@@ -5,6 +5,7 @@ function ContactListResult({contacts,selectContact}){
     }
     if(contacts!=null) {
         var ContactList = contacts.map((contact,key) => {
+            
             return <Contact {...contact} key={key} funct={foo}/>
         });
     

@@ -1,6 +1,8 @@
 import './Contact.css'
 import icon from "./funTalking.jpg"
 function Contact({id, name, server, last, lastDate, funct}) {
+    console.log("hi")
+    
     
     // const chosen =function(params) {
     //     props.handleMain(params);
