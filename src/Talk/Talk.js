@@ -13,8 +13,20 @@ import funTalking from './funTalking.jpg';
 import userContacts from '../userContacts';
 import AddContact from '../AddContact/AddContact';
 import axios from 'axios';
+import { sendMessage } from '@microsoft/signalr/dist/esm/Utils';
 export default function Talk() {
     
+    const [ connection, setConnection ] = useState(null);
+
+    useEffect(() => {
+        const newConnection = new HubConnectionBuilder()
+            .withUrl('https://localhost:7125')
+            .withAutomaticReconnect()
+            .build();
+
+        setConnection(newConnection);
+    }, []);
+
     const [userContacts,setUserContacts] = useState([]);
 
     const [contactList, setContactList] = useState(userContacts);
@@ -51,13 +63,14 @@ export default function Talk() {
         // }
         
    // }
+   const [bit, setBit] = useState(null);
     useEffect(()=>{
         
         var config = {
             headers: {
               'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
             }
-          }
+        }
         const apiContacts = axios.get('https://localhost:7125/Contacts',config)
         .then(res => setUserContacts(JSON.parse(JSON.stringify(res.data))))
         .then(()=>{
@@ -72,7 +85,7 @@ export default function Talk() {
             }
             
         }).then(res => doSearch(""))
-    },[])
+    },[bit])
     
 
     useEffect (()=>{
@@ -118,7 +131,11 @@ export default function Talk() {
     const send = function(){
         var objDiv = document.getElementById("chat-history");
         objDiv.scrollTop = objDiv.scrollHeight;
-
+        var config = {
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
+            }
+        }
         if(document.getElementById("send").value ==""){
             doSearch("");
             return;
@@ -132,7 +149,11 @@ export default function Talk() {
         var str = document.getElementById("send").value;
         var today = new Date();
         const zeroPad = (num, places) => String(num).padStart(places, '0');
-
+        var mashehu=
+        {
+          "content": str
+        }
+        axios.post("https://localhost:7125/Contacts/"+mainContact.id+"/messages",mashehu,config);
         var newMassage= {author: "message-data float-right",authort: "message other-message float-right",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today',massageValue:str, type:'text'}; 
         if(mainContact.massages == "") {
             mainContact.massages = [newMassage];
@@ -142,15 +163,28 @@ export default function Talk() {
         }
         document.getElementById("send").value="";
         doSearch("");
+        sendMessage();
 
         return;
     };
+
+    useEffect(() => {
+        if (connection) {
+            connection.start()
+                .then(result => {
+                    connection.on('ReceiveMessage', message => {
+                       setBit(message);
+                    });
+                })
+                .catch(e => console.log('Connection failed: ', e));
+        }
+    }, [connection]);
 
     const _handleKeyDown = (e) => {
           if (e.key === 'Enter') {
             send();
           }
-        }
+    }
 
 
       

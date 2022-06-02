@@ -5,6 +5,7 @@ import { Nav } from "react-bootstrap";
 import users from '.././users.js'
 import userContacts from "../userContacts";
 import massages from "../massage/massages";
+import axios from "axios";
 
 
 
@@ -26,14 +27,23 @@ export default function AddContact({doSearch}) {
 
     const addUser= function(){
         const name = document.getElementById("email").value;
-        let findings = users.find(element => element.email == name);
-        if (findings==null){
-            alert("no such user");
+        // if (findings==null){
+        //     alert("no such user");
+        // }
+        var user = 
+        {
+            "id": name,
+            "name": " ",
+            "server": 'https://localhost:7125'
         }
-        userContacts.push({img: findings.image ,name: findings.nickname,kind:'clearfix',massages:[""]})
+        var config = {
+            headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
+            }
+        }
+        axios.post('https://localhost:7125/Contacts', user, config);
         closeWindow();
         doSearch("");
-
     }
 
    
@@ -43,7 +53,7 @@ export default function AddContact({doSearch}) {
                 <div className="small-square">
                     <button type="button" className="btn-close close" aria-label="Close" onClick={closeWindow}></button>
                     <div className="window">
-                    <p>Enter contact email:</p>
+                    <p>Enter contact Id:</p>
                     <input placeholder="Enter User Name" id="email"></input>
                     <button onClick={addUser}>add</button>
                     </div>
