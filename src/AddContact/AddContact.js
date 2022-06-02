@@ -6,17 +6,20 @@ import users from '.././users.js'
 import userContacts from "../userContacts";
 import massages from "../massage/massages";
 import axios from "axios";
+import { sendMessage } from "@microsoft/signalr/dist/esm/Utils";
 
 
 
 
 
 
-export default function AddContact({doSearch}) {
+export default function AddContact({doSearch,connection}) {
     const [open,setOpen] = useState(false);
     const openWindow = function(){
         setOpen(true);
     }
+
+
     
 
 
@@ -41,7 +44,8 @@ export default function AddContact({doSearch}) {
             'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
             }
         }
-        axios.post('https://localhost:7125/Contacts', user, config);
+        axios.post('https://localhost:7125/Contacts', user, config)
+        .then(()=>connection.send("SendMessage"));
         closeWindow();
         doSearch("");
     }

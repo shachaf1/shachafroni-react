@@ -14,18 +14,22 @@ import userContacts from '../userContacts';
 import AddContact from '../AddContact/AddContact';
 import axios from 'axios';
 import { sendMessage } from '@microsoft/signalr/dist/esm/Utils';
+import { HubConnection } from '@microsoft/signalr';
+import { HubConnectionBuilder } from '@microsoft/signalr';
 export default function Talk() {
     
     const [ connection, setConnection ] = useState(null);
 
     useEffect(() => {
         const newConnection = new HubConnectionBuilder()
-            .withUrl('https://localhost:7125')
+            .withUrl('https://localhost:7125/myHub')
             .withAutomaticReconnect()
             .build();
 
         setConnection(newConnection);
     }, []);
+
+    
 
     const [userContacts,setUserContacts] = useState([]);
 
@@ -63,7 +67,7 @@ export default function Talk() {
         // }
         
    // }
-   const [bit, setBit] = useState(null);
+   const [bit, setBit] = useState(0);
     useEffect(()=>{
         
         var config = {
@@ -75,7 +79,7 @@ export default function Talk() {
         .then(res => setUserContacts(JSON.parse(JSON.stringify(res.data))))
         .then(()=>{
             if(userContacts.length != 0){
-                console.log(Array(userContacts).at(0));
+                //console.log(Array(userContacts).at(0));
 
                 setMainContact(userContacts[0]);
             }
@@ -153,7 +157,8 @@ export default function Talk() {
         {
           "content": str
         }
-        axios.post("https://localhost:7125/Contacts/"+mainContact.id+"/messages",mashehu,config);
+        axios.post("https://localhost:7125/Contacts/"+mainContact.id+"/messages",mashehu,config)
+        .then(connection.send("SendMessage"));
         var newMassage= {author: "message-data float-right",authort: "message other-message float-right",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today',massageValue:str, type:'text'}; 
         if(mainContact.massages == "") {
             mainContact.massages = [newMassage];
@@ -163,7 +168,7 @@ export default function Talk() {
         }
         document.getElementById("send").value="";
         doSearch("");
-        sendMessage();
+
 
         return;
     };
@@ -172,9 +177,12 @@ export default function Talk() {
         if (connection) {
             connection.start()
                 .then(result => {
-                    connection.on('ReceiveMessage', message => {
-                       setBit(message);
-                    });
+                        connection.on("ReceiveMessage",()=>{
+                            console.log(bit)
+                            let a = bit+1;
+                            setBit(a);
+                        
+                        })
                 })
                 .catch(e => console.log('Connection failed: ', e));
         }
@@ -213,7 +221,7 @@ export default function Talk() {
                         <div className="card chat-app">
 
                             <div id="plist" className="people-list" data-spy="scroll" data-target=".navbar" data-offset="50">
-                                <Search doSearch={doSearch} className ="search"/>
+                                <Search doSearch={doSearch} className ="search" connection={connection}/>
                                 <ul className="list-unstyled chat-list mt-2 mb-0">
                                     <ContactListResult contacts={contactList} selectContact={selectContact}/>
 
