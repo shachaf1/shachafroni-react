@@ -1,5 +1,5 @@
-# use instructions
-
+# use instructions for first assignment
+*from commit G from 26.4 - 1b6d0a96db3be26506fc0f7433b47c51f33daa0f
 run 
 ```bash
 npm start
