@@ -14,9 +14,12 @@ import userContacts from '../userContacts';
 import AddContact from '../AddContact/AddContact';
 import axios from 'axios';
 export default function Talk() {
-
+    
     const [userContacts,setUserContacts] = useState([]);
+
     const [contactList, setContactList] = useState(userContacts);
+    const [mainContact, setMainContact] = useState({"id": "", "name":"", "server":"", "last":"", "lastDate":"", "funct":""});
+
     const [config,setConfig] = useState({
         headers: {
           'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
@@ -59,20 +62,29 @@ export default function Talk() {
         .then(res => setUserContacts(JSON.parse(JSON.stringify(res.data))))
         .then(()=>{
             if(userContacts.length != 0){
-                //setMainContact(userContacts[0]);
+                console.log(Array(userContacts).at(0));
+
+                setMainContact(userContacts[0]);
             }
             else{
-                var tempContact ={img: funTalking,name: 'no chats yet',kind:'clearfix',massages: [""]};
+                var tempContact ={img: funTalking,name: 'select contact from your chat list',kind:'clearfix',massages: [""]};
                 setMainContact(tempContact);
             }
-
-        })
+            
+        }).then(res => doSearch(""))
     },[])
     
-    const [mainContact, setMainContact] = useState({img: funTalking,name: 'no chats yet',kind:'clearfix',massages: [""]});
 
-    
-    
+    useEffect (()=>{
+        doSearch("");
+    },[userContacts])
+
+    useEffect (()=> {
+        if(mainContact.id != '')
+        {
+            axios.get("https://localhost:7125/Contacts/"+mainContact.id+"/messages",config)
+        }
+    },[mainContact])
     const doSearch = function(q){
 
 
@@ -83,6 +95,7 @@ export default function Talk() {
         else {
             setContactList(null);
         }
+
     }
 
     
@@ -90,15 +103,15 @@ export default function Talk() {
         setMainContact(userContacts.find(elem => elem.name===q));
     }
 
-    if (mainContact.massages.length != 0){
-        var MassageList = mainContact.massages.map((massage,key) => {
-        return <Massage author={massage.author} authort={massage.authort} clock ={massage.clock} massageValue={massage.massageValue} type ={massage.type} key={key} />
-        });
-    }
+    // if (mainContact.massages.length != 0){
+    //     var MassageList = mainContact.massages.map((massage,key) => {
+    //     return <Massage author={massage.author} authort={massage.authort} clock ={massage.clock} massageValue={massage.massageValue} type ={massage.type} key={key} />
+    //     });
+    // }
 
-    else {
-        var MassageList= null;        
-    }
+    // else {
+    //     var MassageList= null;        
+    // }
     const [filler, setFiller] = useState(0);
     
 
@@ -133,7 +146,6 @@ export default function Talk() {
         return;
     };
 
-    
     const _handleKeyDown = (e) => {
           if (e.key === 'Enter') {
             send();
@@ -178,7 +190,7 @@ export default function Talk() {
                                 <div className="chat-header clearfix">
                                     <div className="row">
                                         <div className="col-lg-6">
-                                            <img className='imag' src={mainContact.img} alt="avatar"></img>
+                                            <img className='imag' src={funTalking} alt="avatar"></img>
                                             <div className="chat-about">
                                                 <h6  className="m-b-0" >{mainContact.name}</h6>
                                             </div>
@@ -189,12 +201,14 @@ export default function Talk() {
                                     </div>
                                 </div>
                                 <div className="chat-history" id="chat-history">
-                                    <ul className="m-b-0">
-                                        
-                                        {MassageList}
+                                {
+                                    // <ul className="m-b-0">
+                                       
+                                    //     {//MassageList}
                                         
                                        
-                                    </ul>
+                                    // </ul>
+                                }
                                 </div>
                                 <div className="chat-message clearfix">
                                     <div className="input-group mb-0">
