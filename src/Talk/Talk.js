@@ -35,6 +35,7 @@ export default function Talk() {
 
     const [contactList, setContactList] = useState(userContacts);
     const [mainContact, setMainContact] = useState({"id": "", "name":"", "server":"", "last":"", "lastDate":"", "funct":""});
+    const [MassageList,setMassageList] = useState(null);
 
     const [config,setConfig] = useState({
         headers: {
@@ -100,6 +101,24 @@ export default function Talk() {
         if(mainContact.id != '')
         {
             axios.get("https://localhost:7125/Contacts/"+mainContact.id+"/messages",config)
+            .then((res)=>{
+                if (res.data.length!=0) {
+                    var d = res.data.map((massage, key) =>{
+                        const zeroPad = (num, places) => String(num).padStart(places, '0');
+                        let mainDate =new Date(massage.sendTime);
+                        let date =zeroPad(mainDate.getHours(),2) + ':' + zeroPad(mainDate.getMinutes(),2);
+                        if (massage.sent) {
+                            return <Massage author="message-data" authort="message my-message" clock={date} massageValue={massage.content} type="text" key={key}></Massage>
+                        } else {
+                            return <Massage author="message-data float-right" authort="message other-message float-right" clock={date} massageValue={massage.content} type="text" key={key}></Massage>
+                        }
+                        
+                    })
+                    setMassageList(d);
+                } else {
+                    setMassageList(null);
+                }
+            })
         }
     },[mainContact])
     const doSearch = function(q){
@@ -132,7 +151,7 @@ export default function Talk() {
     const [filler, setFiller] = useState(0);
     
 
-    const send = function(){
+    const send =async function(){
         var objDiv = document.getElementById("chat-history");
         objDiv.scrollTop = objDiv.scrollHeight;
         var config = {
@@ -151,21 +170,21 @@ export default function Talk() {
             return;
         }
         var str = document.getElementById("send").value;
-        var today = new Date();
-        const zeroPad = (num, places) => String(num).padStart(places, '0');
+        //var today = new Date();
+        //const zeroPad = (num, places) => String(num).padStart(places, '0');
         var mashehu=
         {
           "content": str
         }
-        axios.post("https://localhost:7125/Contacts/"+mainContact.id+"/messages",mashehu,config)
-        .then(connection.send("SendMessage"));
-        var newMassage= {author: "message-data float-right",authort: "message other-message float-right",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today',massageValue:str, type:'text'}; 
-        if(mainContact.massages == "") {
-            mainContact.massages = [newMassage];
-        }
-        else {
-            mainContact.massages.push(newMassage);
-        }
+        await axios.post("https://localhost:7125/Contacts/"+mainContact.id+"/messages",mashehu,config)
+        await connection.send("SendMessage");
+        // var newMassage= {author: "message-data float-right",authort: "message other-message float-right",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today',massageValue:str, type:'text'}; 
+        // if(mainContact.massages == "") {
+        //     mainContact.massages = [newMassage];
+        // }
+        // else {
+        //     mainContact.massages.push(newMassage);
+        // }
         document.getElementById("send").value="";
         doSearch("");
 
@@ -178,7 +197,7 @@ export default function Talk() {
             connection.start()
                 .then(result => {
                         connection.on("ReceiveMessage",()=>{
-                            console.log(bit)
+                            //console.log(bit)
                             let a = bit+1;
                             setBit(a);
                         
@@ -244,12 +263,12 @@ export default function Talk() {
                                 </div>
                                 <div className="chat-history" id="chat-history">
                                 {
-                                    // <ul className="m-b-0">
+                                    <ul className="m-b-0">
                                        
-                                    //     {//MassageList}
+                                     {MassageList}
                                         
                                        
-                                    // </ul>
+                                     </ul>
                                 }
                                 </div>
                                 <div className="chat-message clearfix">

@@ -19,7 +19,9 @@ function Contact({id, name, server, last, lastDate, funct}) {
     //         LastMassage = massages[massages.length-1].type;
     //     }
     // }
-    
+    const zeroPad = (num, places) => String(num).padStart(places, '0');
+    let mainDate =new Date(lastDate);
+    let date =zeroPad(mainDate.getHours(),2) + ':' + zeroPad(mainDate.getMinutes(),2);
 
     return (
         <div>
@@ -31,7 +33,7 @@ function Contact({id, name, server, last, lastDate, funct}) {
                 <div className="about">
                     <div className="name" style={{fontWeight:"normal",font:"italic", fontSize:"x-large" }}>{name}</div>
                     <div className="status" > <i className="fa fa-circle offline"></i> {LastMassage} </div>
-                    <div className="status" > <i className="fa fa-circle offline"></i> {lastDate} </div>
+                    <div className="status" > <i className="fa fa-circle offline"></i> {date} </div>
                 </div>
             </li>
           </div>
