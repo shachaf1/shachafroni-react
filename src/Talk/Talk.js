@@ -98,16 +98,18 @@ export default function Talk() {
     },[userContacts])
 
     useEffect (()=> {
-        if(mainContact.id != '')
+        if(mainContact != null)
+        {
+            if(mainContact.id != '')
         {
             axios.get("https://localhost:7125/Contacts/"+mainContact.id+"/messages",config)
             .then((res)=>{
                 if (res.data.length!=0) {
                     var d = res.data.map((massage, key) =>{
                         const zeroPad = (num, places) => String(num).padStart(places, '0');
-                        let mainDate =new Date(massage.sendTime);
+                        let mainDate =new Date(massage.created);
                         let date =zeroPad(mainDate.getHours(),2) + ':' + zeroPad(mainDate.getMinutes(),2);
-                        if (massage.sent) {
+                        if (massage.sent == false) {
                             return <Massage author="message-data" authort="message my-message" clock={date} massageValue={massage.content} type="text" key={key}></Massage>
                         } else {
                             return <Massage author="message-data float-right" authort="message other-message float-right" clock={date} massageValue={massage.content} type="text" key={key}></Massage>
@@ -120,6 +122,8 @@ export default function Talk() {
                 }
             })
         }
+        }
+        
     },[mainContact])
     const doSearch = function(q){
 
@@ -176,8 +180,12 @@ export default function Talk() {
         {
           "content": str
         }
-        await axios.post("https://localhost:7125/Contacts/"+mainContact.id+"/messages",mashehu,config)
-        await connection.send("SendMessage");
+        if(mainContact != null)
+        {
+            await axios.post("https://localhost:7125/Contacts/"+mainContact.id+"/messages",mashehu,config)
+            await connection.send("SendMessage");
+        }
+        
         // var newMassage= {author: "message-data float-right",authort: "message other-message float-right",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today',massageValue:str, type:'text'}; 
         // if(mainContact.massages == "") {
         //     mainContact.massages = [newMassage];
@@ -205,6 +213,7 @@ export default function Talk() {
                 })
                 .catch(e => console.log('Connection failed: ', e));
         }
+        console.log("hi");
     }, [connection]);
 
     const _handleKeyDown = (e) => {

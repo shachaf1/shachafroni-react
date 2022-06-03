@@ -4,17 +4,19 @@ import wellcome from './wellcom.PNG'
 import React from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
 import users from '../users';
+import axios from 'axios';
+
 
 
 function Register() {
-    
+
     const validationPassword = (user, passwordValidation) => {
         if(user.password != passwordValidation) {
             return false;
         }
         return true;
     }
-
+    
     const validPassword = (user) => {
         var passw=  /^[A-Za-z0-9]\w{7,14}$/;
         if(!user.password.match(passw)) 
@@ -51,7 +53,7 @@ function Register() {
         }
         return true;
     }
-
+    
     let navigate = useNavigate();
     const RegisterUser = (e) => {
         var email = document.getElementById("email").value;
@@ -59,7 +61,18 @@ function Register() {
         var nickname = document.getElementById("nickname").value;
         var passwordValidation = document.getElementById("validation").value;
         var image = document.getElementById("image").value;
+        axios.post('https://localhost:7125/register?username='+email+'&nickname='+nickname+'&password='+password)
+        .then(response => {
+            if (response.data != null) {
+                localStorage.setItem('jwtToken', response.data);
+                navigate('/talk')
+                //this.setState({ redirect: true });
+            } else {
+                alert("incorect nickname or password");
+                return;
 
+            }
+        })
         var user = {
             email: email,
             password: password,
