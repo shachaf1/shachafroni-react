@@ -56,6 +56,7 @@ function Register() {
     
     let navigate = useNavigate();
     const RegisterUser = (e) => {
+        e.preventdfault();
         var email = document.getElementById("email").value;
         var password = document.getElementById("password").value;
         var nickname = document.getElementById("nickname").value;

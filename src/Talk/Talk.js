@@ -81,8 +81,9 @@ export default function Talk() {
         .then(()=>{
             if(userContacts.length != 0){
                 //console.log(Array(userContacts).at(0));
+                
 
-                setMainContact(userContacts[0]);
+                setMainContact(Math.max.apply(Math, userContacts.map(function(o) { return o.lastDate; })));
             }
             else{
                 var tempContact ={img: funTalking,name: 'select contact from your chat list',kind:'clearfix',massages: [""]};
@@ -184,6 +185,7 @@ export default function Talk() {
         {
             await axios.post("https://localhost:7125/Contacts/"+mainContact.id+"/messages",mashehu,config)
             await connection.send("SendMessage");
+            await setMainContact(mainContact);
         }
         
         // var newMassage= {author: "message-data float-right",authort: "message other-message float-right",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today',massageValue:str, type:'text'}; 
