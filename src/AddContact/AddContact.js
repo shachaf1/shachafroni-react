@@ -57,8 +57,8 @@ export default function AddContact({doSearch,connection}) {
                 <div className="small-square">
                     <button type="button" className="btn-close close" aria-label="Close" onClick={closeWindow}></button>
                     <div className="window">
-                    <p>Enter contact Id:</p>
-                    <input placeholder="Enter User Name" id="email"></input>
+                    <p>Enter contact's mail:</p>
+                    <input placeholder="Enter contact's mail" id="email"></input>
                     <button onClick={addUser}>add</button>
                     </div>
                 </div>

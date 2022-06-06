@@ -56,7 +56,7 @@ function Register() {
     
     let navigate = useNavigate();
     const RegisterUser = (e) => {
-        e.preventdfault();
+        e.preventDefault();
         var email = document.getElementById("email").value;
         var password = document.getElementById("password").value;
         var nickname = document.getElementById("nickname").value;
@@ -86,7 +86,7 @@ function Register() {
         users.push(user);
         //fetch new contact
         
-        navigate('/');
+        //navigate('/');
         return;
     };
 
