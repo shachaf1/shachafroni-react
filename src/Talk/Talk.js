@@ -272,6 +272,7 @@ export default function Talk() {
 
     return (
         <div className='Talk-div'>
+            <a href='http://localhost:5276/' className='rating'>click here to rate</a>
         <img className="logo" src={funTalking1} alt="image"/>
             <nav className="navbar navbar-light bg-light">
                 <div className="container-fluid">
