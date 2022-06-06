@@ -10,12 +10,12 @@ import { ReactDOM } from 'react';
 import MediaButton from '../MediaButton/MediaButton';
 import funTalking1 from './images.png';
 import funTalking from './funTalking.jpg';
-import userContacts from '../userContacts';
 import AddContact from '../AddContact/AddContact';
 import axios from 'axios';
 import { sendMessage } from '@microsoft/signalr/dist/esm/Utils';
 import { HubConnection } from '@microsoft/signalr';
 import { HubConnectionBuilder } from '@microsoft/signalr';
+import { wait } from '@testing-library/user-event/dist/utils';
 export default function Talk() {
     
     const [ connection, setConnection ] = useState(null);
@@ -29,51 +29,68 @@ export default function Talk() {
         setConnection(newConnection);
     }, []);
 
-    const refresh_data = function(){
-        var selectedContact = mainContact;
-        var config = {
-            headers: {
-              'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
-            }
-        }
-        const apiContacts = axios.get('https://localhost:7125/Contacts',config)
-        .then(res => setUserContacts(JSON.parse(JSON.stringify(res.data))))
-        .then(()=>{
-            setMainContact(selectedContact);
+    // const refresh_data = function(){
+    //     var selectedContact = mainContact;
+    //     var config = {
+    //         headers: {
+    //           'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
+    //         }
+    //     }
+    //     const apiContacts = axios.get('https://localhost:7125/Contacts',config)
+    //     .then(res => setUserContacts(JSON.parse(JSON.stringify(res.data))))
+    //     .then(()=>{
+    //         setMainContact(selectedContact);
             
-        }).then(res => doSearch(""))
-        .then(res =>{
-            if (selectedContact.id!=null){
-                axios.get("https://localhost:7125/Contacts/"+selectedContact.id+"/messages",config)
-                .then((res)=>{
-                    // if (res.data.length!=0) {
-                    //     var d = res.data.map((massage, key) =>{
-                    //         const zeroPad = (num, places) => String(num).padStart(places, '0');
-                    //         let mainDate =new Date(massage.created);
-                    //         let date =zeroPad(mainDate.getHours(),2) + ':' + zeroPad(mainDate.getMinutes(),2);
-                    //         if (massage.sent == false) {
-                    //             return <Massage author="message-data" authort="message my-message" clock={date} massageValue={massage.content} type="text" key={key}></Massage>
-                    //         } else {
-                    //             return <Massage author="message-data float-right" authort="message other-message float-right" clock={date} massageValue={massage.content} type="text" key={key}></Massage>
-                    //         }
+    //     }).then(res => doSearch(""))
+    //     .then(res =>{
+    //         if (selectedContact.id!=null){
+    //             axios.get("https://localhost:7125/Contacts/"+selectedContact.id+"/messages",config)
+    //             .then((res)=>{
+    //                 // if (res.data.length!=0) {
+    //                 //     var d = res.data.map((massage, key) =>{
+    //                 //         const zeroPad = (num, places) => String(num).padStart(places, '0');
+    //                 //         let mainDate =new Date(massage.created);
+    //                 //         let date =zeroPad(mainDate.getHours(),2) + ':' + zeroPad(mainDate.getMinutes(),2);
+    //                 //         if (massage.sent == false) {
+    //                 //             return <Massage author="message-data" authort="message my-message" clock={date} massageValue={massage.content} type="text" key={key}></Massage>
+    //                 //         } else {
+    //                 //             return <Massage author="message-data float-right" authort="message other-message float-right" clock={date} massageValue={massage.content} type="text" key={key}></Massage>
+    //                 //         }
                             
-                    //     })
-                    //     setMassageList(d);
-                    // } else {
-                    //     setMassageList(null);
-                    // }
-                    setMainContact(selectedContact);
-                })
-            }
+    //                 //     })
+    //                 //     setMassageList(d);
+    //                 // } else {
+    //                 //     setMassageList(null);
+    //                 // }
+    //                 setMainContact(selectedContact);
+    //             })
+    //         }
             
-        })
+    //     })
         
         
-    }
+    // }
+
+    // const refresher_data =async function(){
+    //     var selectedContact = mainContact;
+    //     var config = {
+    //         headers: {
+    //           'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
+    //         }
+    //     }
+    //     const apiContacts =await axios.get('https://localhost:7125/Contacts',config);
+    //     await setUserContacts(JSON.parse(JSON.stringify((await apiContacts).data)));
+    //     //setMainContact(selectedContact);
+    //     if (selectedContact.id!=null){
+    //             setMainContact(selectedContact);
+    //     }
+    // }
+
+        
+    
     
 
     const [userContacts,setUserContacts] = useState([]);
-
     const [contactList, setContactList] = useState(userContacts);
     const [mainContact, setMainContact] = useState({"id": "", "name":"", "server":"", "last":"", "lastDate":"", "funct":""});
     const [MassageList,setMassageList] = useState(null);
@@ -83,32 +100,8 @@ export default function Talk() {
           'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
         }
       });
-    // const asyncCall = async (apiContacts) => {
-    //     if (Array.isArray(apiContacts)){
-    //         await Array(JSON.parse(JSON.stringify( apiContacts ))
-    //         ).forEach(async element => {
-    //             console.log(element);
-    //             const apimessages = await axios.get('https://localhost:7125/Contacts/' + element[0].id + '/messages', config);
-    //             const messages = [];
-    //             Array(apimessages).forEach(async element => {
-    //                 let author;
-    //                 let authort;
-    //                 if (element.isOneSend) {
-    //                     author = "message-data";
-    //                     authort = "message my-message";
-    //                 } else {
-    //                     author = "message-data float-right";
-    //                     authort = "message my-message float-right";
-    //                 }
-    //                 messages.push(new Massage(author, authort, element['sendTime'], element['content'], 'text'));
-    //             })
-    //             userContacts.push({img: 'https://bootdey.com/img/Content/avatar/avatar8.png',name: element['nickname'],kind:'clearfix',massages: massages})
-    
-    
-    //         })
-        // }
-        
-   // }
+
+
    const [bit, setBit] = useState(0);
     useEffect(()=>{
         
@@ -123,8 +116,10 @@ export default function Talk() {
             if(userContacts.length != 0){
                 //console.log(Array(userContacts).at(0));
                 
+                
 
-                setMainContact(Math.max.apply(Math, userContacts.map(function(o) { return o.lastDate; })));
+                //setMainContact(Math.max.apply(Math, userContacts.map(function(o) { return o.lastDate; })));
+                
             }
             else{
                 var tempContact ={img: funTalking,name: 'select contact from your chat list',kind:'clearfix',massages: [""]};
@@ -139,34 +134,32 @@ export default function Talk() {
         doSearch("");
     },[userContacts])
 
-    useEffect (()=> {
-        if(mainContact != null)
-        {
-            if(mainContact.id != '')
-        {
-            axios.get("https://localhost:7125/Contacts/"+mainContact.id+"/messages",config)
-            .then((res)=>{
-                if (res.data.length!=0) {
-                    var d = res.data.map((massage, key) =>{
-                        const zeroPad = (num, places) => String(num).padStart(places, '0');
-                        let mainDate =new Date(massage.created);
-                        let date =zeroPad(mainDate.getHours(),2) + ':' + zeroPad(mainDate.getMinutes(),2);
-                        if (massage.sent == false) {
-                            return <Massage author="message-data" authort="message my-message" clock={date} massageValue={massage.content} type="text" key={key}></Massage>
+    useEffect(() => {
+        if (mainContact !== null) {
+            if (mainContact.id !== "") {
+                axios.get("https://localhost:7125/Contacts/" + mainContact.id + "/messages", config)
+                    .then((res) => {
+                        if (res.data.length != 0) {
+                            var d = res.data.map((massage, key) => {
+                                const zeroPad = (num, places) => String(num).padStart(places, '0');
+                                let mainDate = new Date(massage.created);
+                                let date = zeroPad(mainDate.getHours(), 2) + ':' + zeroPad(mainDate.getMinutes(), 2);
+                                if (massage.sent == false) {
+                                    return <Massage author="message-data" authort="message my-message" clock={date} massageValue={massage.content} type="text" key={key}></Massage>
+                                } else {
+                                    return <Massage author="message-data float-right" authort="message other-message float-right" clock={date} massageValue={massage.content} type="text" key={key}></Massage>
+                                }
+
+                            })
+                            setMassageList(d);
                         } else {
-                            return <Massage author="message-data float-right" authort="message other-message float-right" clock={date} massageValue={massage.content} type="text" key={key}></Massage>
+                            setMassageList(null);
                         }
-                        
                     })
-                    setMassageList(d);
-                } else {
-                    setMassageList(null);
-                }
-            })
+            }
         }
-        }
-        
-    },[mainContact])
+
+    }, [mainContact, bit])
     const doSearch = function(q){
 
 
@@ -222,12 +215,12 @@ export default function Talk() {
         {
           "content": str
         }
-        if(mainContact != null)
+        if(mainContact != null && mainContact.id != "")
         {
             await axios.post("https://localhost:7125/Contacts/"+mainContact.id+"/messages",mashehu,config);
             document.getElementById("send").value="";
             await connection.send("SendMessage");
-            setMainContact(mainContact);
+            //setMainContact(mainContact);
         }
         
         
@@ -239,18 +232,14 @@ export default function Talk() {
     useEffect(() => {
         if (connection) {
             connection.start()
-                .then(result => {
-                        connection.on("ReceiveMessage",()=>{
-                            //console.log(new Date())
-                            //let a = bit+1;
-                            //setBit(a);
-                            refresh_data();
+                .then(async result => {
+                        connection.on("ReceiveMessage",async ()=>{
+                            setBit(new Date())
                         
                         })
                 })
                 .catch(e => console.log('Connection failed: ', e));
         }
-        console.log("hi");
     }, [connection]);
 
     const _handleKeyDown = (e) => {
