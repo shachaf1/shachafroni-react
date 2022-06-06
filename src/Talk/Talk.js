@@ -29,6 +29,47 @@ export default function Talk() {
         setConnection(newConnection);
     }, []);
 
+    const refresh_data = function(){
+        var selectedContact = mainContact;
+        var config = {
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
+            }
+        }
+        const apiContacts = axios.get('https://localhost:7125/Contacts',config)
+        .then(res => setUserContacts(JSON.parse(JSON.stringify(res.data))))
+        .then(()=>{
+            setMainContact(selectedContact);
+            
+        }).then(res => doSearch(""))
+        .then(res =>{
+            if (selectedContact.id!=null){
+                axios.get("https://localhost:7125/Contacts/"+selectedContact.id+"/messages",config)
+                .then((res)=>{
+                    // if (res.data.length!=0) {
+                    //     var d = res.data.map((massage, key) =>{
+                    //         const zeroPad = (num, places) => String(num).padStart(places, '0');
+                    //         let mainDate =new Date(massage.created);
+                    //         let date =zeroPad(mainDate.getHours(),2) + ':' + zeroPad(mainDate.getMinutes(),2);
+                    //         if (massage.sent == false) {
+                    //             return <Massage author="message-data" authort="message my-message" clock={date} massageValue={massage.content} type="text" key={key}></Massage>
+                    //         } else {
+                    //             return <Massage author="message-data float-right" authort="message other-message float-right" clock={date} massageValue={massage.content} type="text" key={key}></Massage>
+                    //         }
+                            
+                    //     })
+                    //     setMassageList(d);
+                    // } else {
+                    //     setMassageList(null);
+                    // }
+                    setMainContact(selectedContact);
+                })
+            }
+            
+        })
+        
+        
+    }
     
 
     const [userContacts,setUserContacts] = useState([]);
@@ -183,21 +224,14 @@ export default function Talk() {
         }
         if(mainContact != null)
         {
-            await axios.post("https://localhost:7125/Contacts/"+mainContact.id+"/messages",mashehu,config)
+            await axios.post("https://localhost:7125/Contacts/"+mainContact.id+"/messages",mashehu,config);
+            document.getElementById("send").value="";
             await connection.send("SendMessage");
-            await setMainContact(mainContact);
+            setMainContact(mainContact);
         }
         
-        // var newMassage= {author: "message-data float-right",authort: "message other-message float-right",clock:(zeroPad(today.getHours(),2) + ':' + zeroPad(today.getMinutes(),2))+' Today',massageValue:str, type:'text'}; 
-        // if(mainContact.massages == "") {
-        //     mainContact.massages = [newMassage];
-        // }
-        // else {
-        //     mainContact.massages.push(newMassage);
-        // }
-        document.getElementById("send").value="";
+        
         doSearch("");
-
 
         return;
     };
@@ -207,9 +241,10 @@ export default function Talk() {
             connection.start()
                 .then(result => {
                         connection.on("ReceiveMessage",()=>{
-                            //console.log(bit)
-                            let a = bit+1;
-                            setBit(a);
+                            //console.log(new Date())
+                            //let a = bit+1;
+                            //setBit(a);
+                            refresh_data();
                         
                         })
                 })
